@@ -232,7 +232,7 @@ export default async function ContactPage() {
         </section>
 
         {/* Content Section */}
-        {contactPage.content?.rendered && (
+        {contactPage?.content?.rendered && (
           <section className="py-20 bg-gray-50">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <article className="prose prose-lg max-w-none
@@ -240,7 +240,7 @@ export default async function ContactPage() {
                 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
                 prose-a:text-blue-600 hover:prose-a:underline
                 prose-ul:text-gray-700 prose-li:mb-2">
-                <div dangerouslySetInnerHTML={{ __html: contactPage.content.rendered }} />
+                <div dangerouslySetInnerHTML={{ __html: contactPage?.content?.rendered || '' }} />
               </article>
             </div>
           </section>
