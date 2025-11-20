@@ -21,3 +21,6 @@
 ## SEO Fixes
 - [x] Fix social share buttons to use frontend URLs instead of WordPress URLs
 - [x] Canonical URLs already correct in blog posts metadata
+
+## Bug Fixes
+- [x] Create category pages to fix 404 errors and enable browsing posts by category
