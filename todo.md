@@ -24,3 +24,8 @@
 
 ## Bug Fixes
 - [x] Create category pages to fix 404 errors and enable browsing posts by category
+
+## Deployment Fixes
+- [x] Fix WordPress API 403 Forbidden errors during Vercel build
+- [x] Make generateStaticParams handle API failures gracefully
+- [ ] Configure correct environment variables in Vercel (see VERCEL_ENV_SETUP.md)

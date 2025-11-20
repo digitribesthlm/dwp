@@ -95,8 +95,13 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  const slugs = await getServicePageSlugs();
-  return slugs.map((slug) => ({ slug }));
+  try {
+    const slugs = await getServicePageSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch (error) {
+    console.error('Error generating service params:', error);
+    return [];
+  }
 }
 
 export default async function ServiceDetail({ params }) {
