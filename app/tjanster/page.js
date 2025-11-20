@@ -71,7 +71,6 @@ const extractServiceSections = (html) => {
   const regex =
     /<p[^>]*>\s*(?:<strong>|<b>)(.*?)<\/(?:strong|b)>\s*<\/p>([\s\S]*?)(?=<p[^>]*>\s*(?:<strong>|<b>)|$)/gi;
   const services = [];
-  let remainingHtml = html;
   let match;
 
   while ((match = regex.exec(html))) {
@@ -91,13 +90,13 @@ const extractServiceSections = (html) => {
       link: linkMatch ? linkMatch[1] : null,
       slug,
     });
-
-    remainingHtml = remainingHtml.replace(match[0], '');
   }
 
+  // If we successfully extracted services, return empty remainingHtml
+  // to avoid displaying the same content twice
   return {
     services,
-    remainingHtml: remainingHtml.trim(),
+    remainingHtml: services.length > 0 ? '' : html,
   };
 };
 
