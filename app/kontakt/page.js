@@ -110,9 +110,7 @@ export default async function ContactPage() {
             </>
           )}
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-xs font-semibold tracking-[0.3em] text-blue-300 mb-6 uppercase">
-              WordPress-sida · Kontakt
-            </p>
+
             <h1
               className="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
               dangerouslySetInnerHTML={{ __html: contactPage.title.rendered }}
@@ -123,22 +121,8 @@ export default async function ContactPage() {
                 dangerouslySetInnerHTML={{ __html: contactPage.excerpt.rendered }}
               />
             )}
-            <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-300 mb-10">
-              <span>Publicerad {formatDate(contactPage.date)}</span>
-              {contactPage.modified && (
-                <span>Senast uppdaterad {formatDate(contactPage.modified)}</span>
-              )}
-              {authorName && <span>Av {authorName}</span>}
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href={contactPage.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-white/10 text-white px-8 py-3 rounded-md text-lg font-semibold backdrop-blur hover:bg-white/20 transition"
-              >
-                Öppna WordPress-sidan
-              </a>
+
+            <div className="flex justify-center">
               <Link
                 href={`mailto:${contactEmail}`}
                 className="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition"

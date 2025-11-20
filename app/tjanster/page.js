@@ -161,9 +161,7 @@ export default async function ServicesPage() {
             </>
           )}
           <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-xs font-semibold tracking-[0.3em] text-blue-300 mb-6 uppercase">
-              WordPress-sida · Tjänster
-            </p>
+
             <h1
               className="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
               dangerouslySetInnerHTML={{ __html: servicesPage.title.rendered }}
@@ -174,13 +172,7 @@ export default async function ServicesPage() {
                 dangerouslySetInnerHTML={{ __html: servicesPage.excerpt.rendered }}
               />
             )}
-            <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-300 mb-10">
-              <span>Publicerad {formatDate(servicesPage.date)}</span>
-              {servicesPage.modified && (
-                <span>Senast uppdaterad {formatDate(servicesPage.modified)}</span>
-              )}
-              {authorName && <span>Av {authorName}</span>}
-            </div>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/kontakt/"
@@ -188,92 +180,25 @@ export default async function ServicesPage() {
               >
                 Boka ett möte
               </Link>
-              <a
-                href={servicesPage.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-white/10 text-white px-8 py-3 rounded-md text-lg font-semibold backdrop-blur hover:bg-white/20 transition"
-              >
-                Öppna WordPress-sidan
-              </a>
+
             </div>
           </div>
         </section>
 
-        <section className="py-16 bg-gray-50 border-b border-gray-100">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-3">
-                  WordPress
-                </p>
-                <p className="text-sm text-gray-500 mb-1">Permalänk</p>
-                <a
-                  href={servicesPage.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-base font-semibold text-gray-900 break-all hover:text-blue-600"
-                >
-                  {servicesPage.link}
-                </a>
-                {servicesPage.slug && (
-                  <p className="text-xs text-gray-500 mt-3">Slug: {servicesPage.slug}</p>
-                )}
-                {servicesPage.id && (
-                  <p className="text-xs text-gray-400 mt-1">Post-ID: {servicesPage.id}</p>
-                )}
-              </div>
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-3">
-                  Sektioner
-                </p>
-                {headings.length > 0 ? (
-                  <ul className="space-y-2 text-gray-700 text-sm">
-                    {headings.map((heading) => (
-                      <li key={heading} className="flex items-start gap-2">
-                        <span className="text-blue-600 mt-1">•</span>
-                        <span className="font-semibold text-gray-900">{heading}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-sm text-gray-500">
-                    Inga H2/H3 rubriker hittades i WordPress-innehållet.
-                  </p>
-                )}
-              </div>
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-3">
-                  Nästa steg
-                </p>
-                <p className="text-sm text-gray-600 mb-4">
-                  Behöver du stöd kring någon av rubrikerna? Hör av dig så tar vi fram ett
-                  upplägg som passar din MRR-resor.
-                </p>
-                <Link
-                  href="/kontakt/"
-                  className="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-md text-sm font-semibold hover:bg-blue-700 transition"
-                >
-                  Kontakta teamet
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+
 
         {services.length > 0 && (
           <section className="py-20 bg-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="mb-12 text-center">
                 <p className="text-xs font-semibold tracking-[0.35em] text-blue-600 mb-4 uppercase">
-                  Aktuella tjänster
+                  Våra Tjänster
                 </p>
                 <h2 className="text-4xl font-bold text-gray-900">
-                  Direkta utdrag från WordPress-innehållet
+                  Tjänster vi Erbjuder
                 </h2>
                 <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
-                  Varje kort nedan speglar avsnittet på WordPress-sidan, så du alltid kan
-                  länka vidare eller läsa mer utan att lämna sammanhanget.
+                  Vi erbjuder ett brett utbud av digitala marknadsföringstjänster för att hjälpa ditt företag växa.
                 </p>
               </div>
               <div className="grid gap-8 md:grid-cols-2">
@@ -300,14 +225,12 @@ export default async function ServicesPage() {
                         Läs mer →
                       </Link>
                     ) : service.link ? (
-                      <a
-                        href={service.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href="/kontakt/"
                         className="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center gap-2"
                       >
-                        Läs mer på WordPress →
-                      </a>
+                        Kontakta oss →
+                      </Link>
                     ) : (
                       <Link
                         href="/kontakt/"
