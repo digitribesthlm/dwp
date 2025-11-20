@@ -8,7 +8,7 @@ const stripHtml = (html) =>
   html ? html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim() : '';
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   const siteName = siteConfig.name;
 
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function BlogPost({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   
   if (!post) {
