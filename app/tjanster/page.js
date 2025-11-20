@@ -164,10 +164,10 @@ export default async function ServicesPage() {
               className="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
               dangerouslySetInnerHTML={{ __html: pageTitle }}
             />
-            {servicesPage.excerpt?.rendered && (
+            {servicesPage?.excerpt?.rendered && (
               <div
                 className="text-lg md:text-2xl text-gray-200 mb-10 leading-relaxed max-w-3xl mx-auto"
-                dangerouslySetInnerHTML={{ __html: servicesPage.excerpt.rendered }}
+                dangerouslySetInnerHTML={{ __html: servicesPage?.excerpt?.rendered || '' }}
               />
             )}
 
