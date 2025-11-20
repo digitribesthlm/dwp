@@ -93,7 +93,7 @@ export default async function AboutPage() {
   const navigation = buildNavigationData(homepageData);
   const heroImage = getFeaturedImage(aboutPage);
   const authorName = getAuthorName(aboutPage);
-  const wordCount = getWordCount(aboutPage.content?.rendered);
+  const wordCount = getWordCount(aboutPage?.content?.rendered);
 
   return (
     <div className="min-h-screen flex flex-col bg-white">

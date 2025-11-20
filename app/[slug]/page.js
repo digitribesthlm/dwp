@@ -78,7 +78,7 @@ export default async function BlogPost({ params }) {
   const publicUrl = `${siteConfig.baseUrl}/${slug}/`;
   
   // Calculate reading time (rough estimate: 200 words per minute)
-  const wordCount = post.content.rendered.split(/\s+/).length;
+  const wordCount = post?.content?.rendered?.split(/\s+/).length || 0;
   const readingTime = Math.ceil(wordCount / 200);
   
   return (
@@ -187,7 +187,7 @@ export default async function BlogPost({ params }) {
                     prose-strong:text-gray-900 prose-strong:font-semibold
                     [&>p:first-of-type]:border-l-4 [&>p:first-of-type]:border-green-500 
                     [&>p:first-of-type]:pl-6 [&>p:first-of-type]:py-4 [&>p:first-of-type]:bg-gray-50"
-                  dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+                  dangerouslySetInnerHTML={{ __html: post?.content?.rendered || '' }}
                 />
               </div>
               
