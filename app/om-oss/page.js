@@ -137,52 +137,7 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        <section className="py-16 bg-gray-50 border-y border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-2">
-                  WordPress
-                </p>
-                <p className="text-sm text-gray-500 mb-1">Permalänk</p>
-                <a
-                  href={aboutPage.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-base font-semibold text-gray-900 break-all hover:text-blue-600"
-                >
-                  {aboutPage.link}
-                </a>
-              </div>
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-2">
-                  Metadata
-                </p>
-                <p className="text-sm text-gray-500 mb-1">Identitet</p>
-                <p className="text-base font-semibold text-gray-900">
-                  Slug: {aboutPage.slug}
-                </p>
-                {aboutPage.id && (
-                  <p className="text-xs text-gray-500 mt-2">Post-ID: {aboutPage.id}</p>
-                )}
-              </div>
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-2">
-                  Status
-                </p>
-                <p className="text-sm text-gray-500 mb-1">WordPress-status</p>
-                <p className="text-base font-semibold text-gray-900">
-                  {aboutPage.status?.toUpperCase()}
-                </p>
-                {aboutPage.modified && (
-                  <p className="text-xs text-gray-500 mt-2">
-                    Senast ändrad {formatDate(aboutPage.modified)}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
+
 
         <section className="py-20 bg-white">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -28,7 +28,7 @@ const getReadingTime = (post) => {
 
 const categoriesDescription = (categories, totalPosts) => {
   if (categories.length === 0) {
-    return 'Inga kategorier skickades med i WordPress-svaret.';
+    return 'Inga kategorier tillgängliga.';
   }
   const list = categories
     .map((category) => `${category.name} (${category.count})`)
@@ -41,7 +41,7 @@ export async function generateMetadata() {
   const siteName = data?.footer?.company?.name || siteConfig.name;
   const description =
     siteConfig.description ||
-    'Aktuella artiklar, case och guider hämtade direkt från WordPress-flödet.';
+    'Aktuella artiklar, case och guider från vår blogg.';
 
   const metadata = {
     metadataBase: new URL(siteConfig.baseUrl),
@@ -153,14 +153,7 @@ export default async function BloggPage() {
                 >
                   Läs artikeln
                 </Link>
-                <a
-                  href={heroPost.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center bg-white/10 text-white px-8 py-3 rounded-md text-lg font-semibold backdrop-blur hover:bg-white/20 transition"
-                >
-                  Öppna på WordPress
-                </a>
+
               </div>
             </div>
           </section>
@@ -174,7 +167,7 @@ export default async function BloggPage() {
                 Inga publicerade artiklar ännu
               </h1>
               <p className="text-lg text-gray-300">
-                WordPress-flödet svarade utan poster. Försök igen senare.
+                Inga artiklar tillgängliga för tillfället. Försök igen senare.
               </p>
             </div>
           </section>
@@ -219,7 +212,7 @@ export default async function BloggPage() {
               <div className="space-y-6">
                 <div className="bg-gray-900 text-white rounded-3xl p-8 shadow-lg">
                   <h3 className="text-xl font-bold mb-4">
-                    Ämnen från WordPress ({sortedCategories.length})
+                    Kategorier ({sortedCategories.length})
                   </h3>
                   <p className="text-gray-300 text-sm mb-6">
                     Visar kategorier baserat på de senaste {allPosts.length} posterna.
@@ -279,7 +272,7 @@ export default async function BloggPage() {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12">
               <div>
                 <p className="text-sm uppercase tracking-[0.3em] text-blue-600 mb-3">
-                  WordPress-feed
+                  Alla Artiklar
                 </p>
                 <h2 className="text-4xl font-bold text-gray-900">
                   {`Visar ${otherPosts.length} ytterligare artiklar`}
@@ -299,7 +292,7 @@ export default async function BloggPage() {
             {otherPosts.length === 0 ? (
               <div className="bg-white rounded-3xl p-12 text-center border border-gray-200">
                 <p className="text-lg text-gray-600">
-                  WordPress returnerade bara en artikel den här gången.
+                  Det finns bara en artikel för tillfället.
                 </p>
               </div>
             ) : (

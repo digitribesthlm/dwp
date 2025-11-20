@@ -134,24 +134,7 @@ export default async function ContactPage() {
         </section>
 
         <section className="py-16 bg-gray-50 border-y border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-3">
-                WordPress
-              </p>
-              <p className="text-sm text-gray-500 mb-1">Permalänk</p>
-              <a
-                href={contactPage.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-base font-semibold text-gray-900 break-all hover:text-blue-600"
-              >
-                {contactPage.link}
-              </a>
-              {contactPage.slug && (
-                <p className="text-xs text-gray-500 mt-3">Slug: {contactPage.slug}</p>
-              )}
-            </div>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
               <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-3">
                 Kontakt
@@ -177,23 +160,6 @@ export default async function ContactPage() {
                   {contactEmail}
                 </a>
               </div>
-            </div>
-            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-3">
-                Status
-              </p>
-              <p className="text-sm text-gray-500 mb-1">WordPress-status</p>
-              <p className="text-base font-semibold text-gray-900">
-                {contactPage.status?.toUpperCase()}
-              </p>
-              {contactPage.modified && (
-                <p className="text-xs text-gray-500 mt-2">
-                  Senast ändrad {formatDate(contactPage.modified)}
-                </p>
-              )}
-              {contactPage.id && (
-                <p className="text-xs text-gray-400 mt-2">Post-ID: {contactPage.id}</p>
-              )}
             </div>
           </div>
         </section>

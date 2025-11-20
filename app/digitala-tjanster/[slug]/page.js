@@ -62,13 +62,13 @@ export async function generateMetadata({ params }) {
     title: `${plainTitle} | ${siteName}`,
     description:
       plainExcerpt ||
-      'Fördjupad tjänstebeskrivning hämtad från WordPress-innehållet.',
+      'Fördjupad tjänstebeskrivning av våra digitala tjänster.',
     alternates: { canonical: `/digitala-tjanster/${slug}/` },
     openGraph: {
       title: plainTitle,
       description:
         plainExcerpt ||
-        'Fördjupad tjänstebeskrivning hämtad från WordPress-innehållet.',
+        'Fördjupad tjänstebeskrivning av våra digitala tjänster.',
       url: `${siteConfig.baseUrl}/digitala-tjanster/${slug}/`,
       siteName,
       type: 'article',
@@ -88,7 +88,7 @@ export async function generateMetadata({ params }) {
       title: plainTitle,
       description:
         plainExcerpt ||
-        'Fördjupad tjänstebeskrivning hämtad från WordPress-innehållet.',
+        'Fördjupad tjänstebeskrivning av våra digitala tjänster.',
       images: image ? [image] : undefined,
     },
   };
@@ -192,34 +192,14 @@ export default async function ServiceDetail({ params }) {
         </section>
 
         <section className="py-16 bg-gray-50 border-b border-gray-100">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-3">
-                WordPress
-              </p>
-              <p className="text-sm text-gray-500 mb-1">Permalänk</p>
-              <a
-                href={page.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-base font-semibold text-gray-900 break-all hover:text-blue-600"
-              >
-                {page.link}
-              </a>
-              {page.slug && (
-                <p className="text-xs text-gray-500 mt-3">Slug: {page.slug}</p>
-              )}
-              {page.id && (
-                <p className="text-xs text-gray-400 mt-1">Post-ID: {page.id}</p>
-              )}
-            </div>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
               <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-3">
                 Om tjänsten
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
                 {stripHtml(page.excerpt?.rendered) ||
-                  'Den här sidan är hämtad direkt från WordPress och uppdateras automatiskt när innehållet redigeras där.'}
+                  'Kontakta oss för mer information om denna tjänst.'}
               </p>
             </div>
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
