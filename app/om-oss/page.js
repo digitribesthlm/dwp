@@ -146,7 +146,8 @@ export default async function AboutPage() {
               prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
               prose-a:text-blue-600 hover:prose-a:underline
               prose-ul:text-gray-700 prose-li:mb-2">
-                dangerouslySetInnerHTML={{ __html: pageContent }} }} />
+                dangerouslySetInnerHTML={{ __html: pageContent }}
+              />
             </article>
           </div>
         </section>
