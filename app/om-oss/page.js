@@ -41,13 +41,13 @@ export async function generateMetadata() {
     };
   }
 
-  const plainTitle = stripHtml(aboutPage.title?.rendered) || 'Om oss';
+  const plainTitle = stripHtml(aboutPage?.title?.rendered) || 'Om oss';
   const plainExcerpt =
-    stripHtml(aboutPage.excerpt?.rendered) ||
+    stripHtml(aboutPage?.excerpt?.rendered) ||
     siteConfig.description ||
     'Lär känna oss bättre.';
   const image =
-    aboutPage._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+    aboutPage?._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
     siteConfig.defaultOgImage;
 
   return {
@@ -122,7 +122,7 @@ export default async function AboutPage() {
             {aboutPage.excerpt?.rendered && (
               <div
                 className="text-lg md:text-2xl text-gray-200 mb-10 leading-relaxed max-w-3xl mx-auto"
-                dangerouslySetInnerHTML={{ __html: aboutPage.excerpt.rendered }}
+                dangerouslySetInnerHTML={{ __html: aboutPage?.excerpt?.rendered || '' }}
               />
             )}
 

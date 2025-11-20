@@ -35,13 +35,13 @@ export async function generateMetadata() {
     };
   }
 
-  const plainTitle = stripHtml(contactPage.title?.rendered) || 'Kontakt';
+  const plainTitle = stripHtml(contactPage?.title?.rendered) || 'Kontakt';
   const plainExcerpt =
-    stripHtml(contactPage.excerpt?.rendered) ||
+    stripHtml(contactPage?.excerpt?.rendered) ||
     siteConfig.description ||
     'Hör av dig via formuläret.';
   const image =
-    contactPage._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+    contactPage?._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
     siteConfig.defaultOgImage;
 
   return {
@@ -105,7 +105,7 @@ export default async function ContactPage() {
               <div className="absolute inset-0">
                 <img
                   src={heroImage}
-                  alt={contactPage.title.rendered}
+                  alt={contactPage?.title?.rendered || 'Kontakt'}
                   className="w-full h-full object-cover opacity-40"
                 />
               </div>
