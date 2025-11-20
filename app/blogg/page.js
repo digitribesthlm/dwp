@@ -275,7 +275,7 @@ export default async function BloggPage() {
                     {getFeaturedImage(post) && (
                       <img
                         src={getFeaturedImage(post)}
-                        alt={post.title.rendered}
+                        alt={post?.title?.rendered || 'Blog post'}
                         className="w-full h-48 object-cover rounded-t-3xl"
                       />
                     )}
@@ -285,14 +285,14 @@ export default async function BloggPage() {
                       </p>
                       <h3
                         className="text-xl font-bold text-gray-900 mb-3 leading-snug"
-                        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                        dangerouslySetInnerHTML={{ __html: post?.title?.rendered || '' }}
                       />
                       <p className="text-sm text-gray-500 mb-4">
                         {formatDate(post.date)}
                       </p>
                       <div
                         className="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-6"
-                        dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                        dangerouslySetInnerHTML={{ __html: post?.excerpt?.rendered || '' }}
                       />
                       <div className="mt-auto">
                         <Link

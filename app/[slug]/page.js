@@ -172,7 +172,7 @@ export default async function BlogPost({ params }) {
                 {featuredImage && (
                   <img 
                     src={featuredImage}
-                    alt={post.title.rendered}
+                    alt={post?.title?.rendered || 'Blog post'}
                     className="w-full h-auto mb-8 rounded-lg"
                   />
                 )}

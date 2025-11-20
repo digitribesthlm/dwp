@@ -166,15 +166,15 @@ export default async function ServiceDetail({ params }) {
               className="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
               dangerouslySetInnerHTML={{ __html: pageTitle }}
             />
-            {page.excerpt?.rendered && (
+            {page?.excerpt?.rendered && (
               <div
                 className="text-lg md:text-2xl text-gray-200 mb-10 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: page.excerpt.rendered }}
+                dangerouslySetInnerHTML={{ __html: page?.excerpt?.rendered || '' }}
               />
             )}
             <div className="flex flex-wrap gap-6 text-sm text-gray-300 mb-10">
               <span>Publicerad {formatDate(page.date)}</span>
-              {page.modified && (
+              {page?.modified && (
                 <span>Senast uppdaterad {formatDate(page.modified)}</span>
               )}
               {authorName && <span>Av {authorName}</span>}

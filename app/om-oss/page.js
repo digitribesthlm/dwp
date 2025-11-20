@@ -119,7 +119,7 @@ export default async function AboutPage() {
               className="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
               dangerouslySetInnerHTML={{ __html: pageTitle }}
             />
-            {aboutPage.excerpt?.rendered && (
+            {aboutPage?.excerpt?.rendered && (
               <div
                 className="text-lg md:text-2xl text-gray-200 mb-10 leading-relaxed max-w-3xl mx-auto"
                 dangerouslySetInnerHTML={{ __html: aboutPage?.excerpt?.rendered || '' }}

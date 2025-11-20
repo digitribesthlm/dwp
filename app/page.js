@@ -195,8 +195,8 @@ export default async function Home() {
                 <article key={post.id} className="bg-white rounded-lg overflow-hidden hover:shadow-xl transition border border-gray-200">
                   {post._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
                     <img 
-                      src={post._embedded['wp:featuredmedia'][0].source_url}
-                      alt={post.title.rendered}
+                      src={post?._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''}
+                      alt={post?.title?.rendered || 'Blog post'}
                       className="w-full h-48 object-cover"
                     />
                   )}
@@ -212,12 +212,12 @@ export default async function Home() {
                       <Link 
                         href={`/${post.slug}`}
                         className="hover:text-blue-600"
-                        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                        dangerouslySetInnerHTML={{ __html: post?.title?.rendered || '' }}
                       />
                     </h3>
                     <div 
                       className="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                      dangerouslySetInnerHTML={{ __html: post?.excerpt?.rendered || '' }}
                     />
                     <Link 
                       href={`/${post.slug}`}
