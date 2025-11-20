@@ -134,7 +134,8 @@ export default async function ContactPage() {
         </section>
 
         <section className="py-16 bg-gray-50 border-y border-gray-100">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
               <p className="text-xs uppercase tracking-[0.35em] text-blue-600 mb-3">
                 Kontakt
@@ -160,6 +161,20 @@ export default async function ContactPage() {
                   {contactEmail}
                 </a>
               </div>
+            </div>
+            
+            {/* Google Maps */}
+            <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm" style={{height: '400px'}}>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2034.2864858916!2d18.031806!3d59.331261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9d5e8e8e8e8f%3A0x8e8e8e8e8e8e8e8e!2sJaktvarvsplan%203%2C%20112%2034%20Stockholm!5e0!3m2!1sen!2sse!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{border: 0}}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Digi Growth STHLM Location"
+              />
             </div>
           </div>
         </section>

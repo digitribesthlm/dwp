@@ -10,7 +10,11 @@ export const metadata = {
   },
 };
 
-export default function CookiePage() {
+export default async function CookiePage() {
+  // Fetch homepage data for footer
+  const { getHomepageData } = await import('@/lib/api');
+  const homepageData = await getHomepageData();
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
@@ -107,7 +111,7 @@ export default function CookiePage() {
         </section>
       </main>
 
-      <Footer />
+      <Footer data={homepageData?.footer} />
     </div>
   );
 }

@@ -237,7 +237,7 @@ export default async function BloggPage() {
                 {sidebarPosts.length > 0 && (
                   <div className="bg-blue-50 rounded-3xl p-8 border border-blue-100">
                     <h3 className="text-xl font-bold text-gray-900 mb-4">
-                      Fler artiklar från flödet
+                      Fler artiklar
                     </h3>
                     <div className="space-y-4">
                       {sidebarPosts.map((post) => (
@@ -275,11 +275,8 @@ export default async function BloggPage() {
                   Alla Artiklar
                 </p>
                 <h2 className="text-4xl font-bold text-gray-900">
-                  {`Visar ${otherPosts.length} ytterligare artiklar`}
+                  Alla artiklar
                 </h2>
-                <p className="text-gray-600 mt-3">
-                  {categoriesDescription(sortedCategories, otherPosts.length)}
-                </p>
               </div>
               <Link
                 href="/blogg/"
