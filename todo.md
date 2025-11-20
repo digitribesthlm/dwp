@@ -17,3 +17,7 @@
 - [x] Add spam protection (honeypot + rate limiting)
 - [x] Improve kontakt page layout with form, contact info, and map
 - [x] Add form validation and user feedback
+
+## SEO Fixes
+- [x] Fix social share buttons to use frontend URLs instead of WordPress URLs
+- [x] Canonical URLs already correct in blog posts metadata

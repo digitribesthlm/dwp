@@ -74,6 +74,9 @@ export default async function BlogPost({ params }) {
   const author = post._embedded?.author?.[0]?.name || 'Sandra Ericsson';
   const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'SEO';
   
+  // Use frontend URL for sharing instead of WordPress URL
+  const publicUrl = `${siteConfig.baseUrl}/${slug}/`;
+  
   // Calculate reading time (rough estimate: 200 words per minute)
   const wordCount = post.content.rendered.split(/\s+/).length;
   const readingTime = Math.ceil(wordCount / 200);
@@ -118,7 +121,7 @@ export default async function BlogPost({ params }) {
             <div className="flex items-center gap-4 mb-8 pb-8 border-b border-gray-200">
               <span className="text-sm font-semibold text-gray-700">SHARE</span>
               <a 
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(post.link)}`}
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(publicUrl)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-blue-600 transition"
@@ -129,7 +132,7 @@ export default async function BlogPost({ params }) {
                 </svg>
               </a>
               <a 
-                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(post.link)}&text=${encodeURIComponent(post.title.rendered)}`}
+                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(publicUrl)}&text=${encodeURIComponent(post.title.rendered)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-blue-600 transition"
@@ -140,7 +143,7 @@ export default async function BlogPost({ params }) {
                 </svg>
               </a>
               <a 
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(post.link)}`}
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(publicUrl)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-blue-600 transition"
@@ -151,7 +154,7 @@ export default async function BlogPost({ params }) {
                 </svg>
               </a>
               <a 
-                href={`mailto:?subject=${encodeURIComponent(post.title.rendered)}&body=${encodeURIComponent(post.link)}`}
+                href={`mailto:?subject=${encodeURIComponent(post.title.rendered)}&body=${encodeURIComponent(publicUrl)}`}
                 className="text-gray-600 hover:text-blue-600 transition"
                 aria-label="Share via Email"
               >
