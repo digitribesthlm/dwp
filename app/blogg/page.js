@@ -234,33 +234,6 @@ export default async function BloggPage() {
                   </div>
                 </div>
 
-                {sidebarPosts.length > 0 && (
-                  <div className="bg-blue-50 rounded-3xl p-8 border border-blue-100">
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">
-                      Fler artiklar
-                    </h3>
-                    <div className="space-y-4">
-                      {sidebarPosts.map((post) => (
-                        <Link
-                          key={post.id}
-                          href={`/${post.slug}/`}
-                          className="block p-4 rounded-2xl border border-blue-100 bg-white hover:border-blue-200 transition"
-                        >
-                          <p className="text-xs font-semibold text-blue-600 uppercase mb-1">
-                            {getCategory(post) || 'Artikel'}
-                          </p>
-                          <p
-                            className="font-semibold text-gray-900 text-sm leading-snug"
-                            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                          />
-                          <p className="text-xs text-gray-500 mt-1">
-                            {formatDate(post.date)}
-                          </p>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           </section>
