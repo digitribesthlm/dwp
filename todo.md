@@ -29,3 +29,7 @@
 - [x] Fix WordPress API 403 Forbidden errors during Vercel build
 - [x] Make generateStaticParams handle API failures gracefully
 - [ ] Configure correct environment variables in Vercel (see VERCEL_ENV_SETUP.md)
+
+## Critical Fixes
+- [x] Fix homepage 500 error when WordPress API fails
+- [x] Add fallback data for homepage when API is unreachable
