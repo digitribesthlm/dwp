@@ -73,7 +73,7 @@ export default function Footer({ data }) {
               </p>
             ) : (
               <p className="text-gray-600 text-sm">
-                Uppdatera kontaktuppgifterna i ditt API eller miljövariabler.
+                Uppdatera kontaktuppgifterna i ditt API eller miljövariabler
               </p>
             )}
           </div>
