@@ -244,20 +244,7 @@ export default async function ServicesPage() {
           </section>
         )}
 
-        {finalHtml && (
-          <section className="py-20 bg-white">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-              <article
-                className="prose prose-lg max-w-none
-                prose-headings:text-gray-900 prose-headings:font-bold
-                prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
-                prose-a:text-blue-600 hover:prose-a:underline
-                prose-ul:text-gray-700 prose-li:mb-2"
-                dangerouslySetInnerHTML={{ __html: finalHtml }}
-              />
-            </div>
-          </section>
-        )}
+        {/* Removed finalHtml section - services are displayed in card grid above */}
       </main>
 
       <Footer data={homepageData?.footer} />
