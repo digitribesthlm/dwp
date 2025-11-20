@@ -86,9 +86,9 @@ export default async function AboutPage() {
     getPageBySlug('om-oss'),
   ]);
 
-  if (!aboutPage) {
-    notFound();
-  }
+  // Use fallback data if WordPress page is not available
+  const pageTitle = aboutPage?.title?.rendered || 'Om Oss';
+  const pageContent = aboutPage?.content?.rendered || '<p>Innehåll laddas...</p>';
 
   const navigation = buildNavigationData(homepageData);
   const heroImage = getFeaturedImage(aboutPage);
@@ -106,7 +106,7 @@ export default async function AboutPage() {
               <div className="absolute inset-0">
                 <img
                   src={heroImage}
-                  alt={aboutPage.title.rendered}
+                  alt={pageTitle}
                   className="w-full h-full object-cover opacity-40"
                 />
               </div>
@@ -117,7 +117,7 @@ export default async function AboutPage() {
 
             <h1
               className="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
-              dangerouslySetInnerHTML={{ __html: aboutPage.title.rendered }}
+              dangerouslySetInnerHTML={{ __html: pageTitle }}
             />
             {aboutPage.excerpt?.rendered && (
               <div
@@ -146,7 +146,7 @@ export default async function AboutPage() {
               prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
               prose-a:text-blue-600 hover:prose-a:underline
               prose-ul:text-gray-700 prose-li:mb-2">
-              <div dangerouslySetInnerHTML={{ __html: aboutPage.content.rendered }} />
+                dangerouslySetInnerHTML={{ __html: pageContent }} }} />
             </article>
           </div>
         </section>

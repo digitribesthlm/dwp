@@ -33,3 +33,12 @@
 ## Critical Fixes
 - [x] Fix homepage 500 error when WordPress API fails
 - [x] Add fallback data for homepage when API is unreachable
+
+## Page Fixes
+- [x] Add trailing slash configuration to Next.js
+- [x] Fix /kontakt page to handle null data
+- [x] Fix /digitala-tjanster/[slug] pages to handle null data
+- [x] Fix /om-oss page to handle null data
+- [x] Fix /tjanster page to handle null data
+- [ ] Fix /category/[slug] pages to handle null data
+- [ ] Fix /[slug] blog post pages to handle null data

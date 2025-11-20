@@ -80,9 +80,10 @@ export default async function ContactPage() {
     getPageBySlug('kontakt'),
   ]);
 
-  if (!contactPage) {
-    notFound();
-  }
+  // Use fallback data if WordPress page is not available
+  const pageTitle = contactPage?.title?.rendered || 'Kontakt';
+  const pageExcerpt = contactPage?.excerpt?.rendered || 'Kontakta oss för mer information.';
+  const pageContent = contactPage?.content?.rendered || '';
 
   const navigation = buildNavigationData(homepageData);
   const heroImage = getFeaturedImage(contactPage);
@@ -114,12 +115,12 @@ export default async function ContactPage() {
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1
               className="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
-              dangerouslySetInnerHTML={{ __html: contactPage.title.rendered }}
+              dangerouslySetInnerHTML={{ __html: pageTitle }}
             />
-            {contactPage.excerpt?.rendered && (
+            {pageExcerpt && (
               <div
                 className="text-lg md:text-2xl text-gray-200 mb-10 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: contactPage.excerpt.rendered }}
+                dangerouslySetInnerHTML={{ __html: pageExcerpt }}
               />
             )}
           </div>

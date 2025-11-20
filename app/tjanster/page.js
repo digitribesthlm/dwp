@@ -129,18 +129,16 @@ export default async function ServicesPage() {
     getServicesPage(),
   ]);
 
-  if (!servicesPage) {
-    notFound();
-  }
+  // Use fallback data if WordPress page is not available
+  const pageTitle = servicesPage?.title?.rendered || 'Våra Tjänster';
+  const pageContent = servicesPage?.content?.rendered || '<p>Innehåll laddas...</p>';
 
   const navigation = buildNavigationData(homepageData);
   const heroImage = getFeaturedImage(servicesPage);
   const authorName = getAuthorName(servicesPage);
-  const headings = extractHeadings(servicesPage.content?.rendered);
-  const { services, remainingHtml } = extractServiceSections(
-    servicesPage.content?.rendered,
-  );
-  const finalHtml = remainingHtml || servicesPage.content?.rendered || '';
+  const headings = extractHeadings(pageContent);
+  const { services, remainingHtml } = extractServiceSections(pageContent);
+  const finalHtml = remainingHtml || pageContent || '';
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -153,7 +151,7 @@ export default async function ServicesPage() {
               <div className="absolute inset-0">
                 <img
                   src={heroImage}
-                  alt={servicesPage.title.rendered}
+                  alt={pageTitle}
                   className="w-full h-full object-cover opacity-40"
                 />
               </div>
@@ -164,7 +162,7 @@ export default async function ServicesPage() {
 
             <h1
               className="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
-              dangerouslySetInnerHTML={{ __html: servicesPage.title.rendered }}
+              dangerouslySetInnerHTML={{ __html: pageTitle }}
             />
             {servicesPage.excerpt?.rendered && (
               <div

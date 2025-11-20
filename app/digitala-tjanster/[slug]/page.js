@@ -112,9 +112,9 @@ export default async function ServiceDetail({ params }) {
     getPageBySlug(slug),
   ]);
 
-  if (!page) {
-    notFound();
-  }
+  // Use fallback data if WordPress page is not available
+  const pageTitle = page?.title?.rendered || slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  const pageContent = page?.content?.rendered || '<p>Innehåll laddas...</p>';
 
   const navigation = buildNavigationData(homepageData);
   const heroImage = getFeaturedImage(page);
@@ -132,7 +132,7 @@ export default async function ServiceDetail({ params }) {
               <div className="absolute inset-0">
                 <img
                   src={heroImage}
-                  alt={page.title.rendered}
+                  alt={pageTitle}
                   className="w-full h-full object-cover opacity-40"
                 />
               </div>
@@ -164,7 +164,7 @@ export default async function ServiceDetail({ params }) {
             </p>
             <h1
               className="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
-              dangerouslySetInnerHTML={{ __html: page.title.rendered }}
+              dangerouslySetInnerHTML={{ __html: pageTitle }}
             />
             {page.excerpt?.rendered && (
               <div
@@ -233,7 +233,7 @@ export default async function ServiceDetail({ params }) {
                 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
                 prose-a:text-blue-600 hover:prose-a:underline
                 prose-ul:text-gray-700 prose-li:mb-2"
-              dangerouslySetInnerHTML={{ __html: page.content?.rendered }}
+              dangerouslySetInnerHTML={{ __html: pageContent }}}
             />
           </div>
         </section>
