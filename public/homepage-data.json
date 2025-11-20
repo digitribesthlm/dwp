@@ -10,7 +10,7 @@
       "link": "/kontakt"
     },
     "background_image": {
-      "url": "https://www.digigrowth.se/wp-content/uploads/2025/11/film-2-scaled.jpg",
+      "url": "/wp-content/uploads/2025/11/film-2-scaled.jpg",
       "alt": "Digital marknadsföring"
     }
   },
@@ -24,7 +24,7 @@
         "title": "Mål i Fokus",
         "description": "Vår expertis ligger i att identifiera din målgrupp, optimera valet av trafikkanaler och mäta resultaten.",
         "icon": "target",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_target.png"
+        "image": "/wp-content/uploads/2020/09/small_target.png"
       },
       {
         "id": 2,
@@ -32,7 +32,7 @@
         "title": "Robust Konvertering",
         "description": "Öka förtroende och sänk osäkerhet - skapar kontakt och köp.",
         "icon": "conversion",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_kina.png"
+        "image": "/wp-content/uploads/2020/09/small_kina.png"
       },
       {
         "id": 3,
@@ -40,7 +40,7 @@
         "title": "Resultat",
         "description": "Släntar på höga LTV siffror och förmedla värde till kunder.",
         "icon": "results",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_dator.png"
+        "image": "/wp-content/uploads/2020/09/small_dator.png"
       }
     ]
   },
@@ -53,84 +53,84 @@
         "category": "MMR PROCESS",
         "title": "Mässa",
         "description": "Sprida budskap om att ett uppskattat event är tillbaka.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2022/08/motorcykel.jpg"
+        "image": "/wp-content/uploads/2022/08/motorcykel.jpg"
       },
       {
         "id": 2,
         "category": "MMR PROCESS",
         "title": "Intresseorganisation",
         "description": "Mobilisering av befintliga och nya supportar efter en utmanande tid i pressen.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2021/03/kids303204.png"
+        "image": "/wp-content/uploads/2021/03/kids303204.png"
       },
       {
         "id": 3,
         "category": "SOCIALA MEDIER",
         "title": "Förbund",
         "description": "Dags för VM och ökad närvaro i Sociala Medier. Vi skapar den digitala infrastrukturen.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2021/03/figureskate_303-204-1.png"
+        "image": "/wp-content/uploads/2021/03/figureskate_303-204-1.png"
       },
       {
         "id": 4,
         "category": "MRR PROCESS",
         "title": "Ransomware",
         "description": "Ledande ransomware företag söker nya B2B kunder via LinkedIn & Google annonsering.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2021/03/Ransomware303204.png"
+        "image": "/wp-content/uploads/2021/03/Ransomware303204.png"
       },
       {
         "id": 5,
         "category": "MRR PROCESS",
         "title": "Golf Imperium",
         "description": "B2C företag med fokus på att värva medlemmar. Resultat: vi blir världens största golfklubb. Upps.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/03/golf.png"
+        "image": "/wp-content/uploads/2020/03/golf.png"
       },
       {
         "id": 6,
         "category": "MRR PROCESS",
         "title": "Matglad",
         "description": "Vi utvärderar nuvarande marknadsföring och kommer med förslag på förbättringar.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_halsan_forst.png"
+        "image": "/wp-content/uploads/2020/09/small_halsan_forst.png"
       },
       {
         "id": 7,
         "category": "MRR PROCESS",
         "title": "Växande BI Företag",
         "description": "MRR process för B2B företag med fokus på Sverige, Finland, Holland och UK.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_bi_foretag.png"
+        "image": "/wp-content/uploads/2020/09/small_bi_foretag.png"
       },
       {
         "id": 8,
         "category": "UTVÄRDERING",
         "title": "Riskkapitalbolag",
         "description": "Utvärdering av Marketing Automation (MA) satsning och vad kan bli bättre framöver.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_kapital-1.png"
+        "image": "/wp-content/uploads/2020/09/small_kapital-1.png"
       },
       {
         "id": 9,
         "category": "SOCIALA MEDIER",
         "title": "PR Bolag",
         "description": "Nå ledamöter för Sveriges Riksdag via LinkedIn och Twitter. Avsändare intresseorganisation.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_pr_bolag.png"
+        "image": "/wp-content/uploads/2020/09/small_pr_bolag.png"
       },
       {
         "id": 10,
         "category": "SEO | MÄTNING | RAPPORTER",
         "title": "Entreprenör",
         "description": "SEO arbete för B2C e-commerce företag. Fokus på den Svenska marknaden.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_smycke.png"
+        "image": "/wp-content/uploads/2020/09/small_smycke.png"
       },
       {
         "id": 11,
         "category": "SEM | SOCIALA MEDIER",
         "title": "Bokförlag",
         "description": "Deckarförfattare söker försäljning via Google och Sociala Medier samt Remarketing.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_bokforlag.png"
+        "image": "/wp-content/uploads/2020/09/small_bokforlag.png"
       },
       {
         "id": 12,
         "category": "SEO | SOCIALA MEDIER",
         "title": "Inget Konstigt",
         "description": "Institutioner för internationell samtidskonst vill nå ut till bredare publik.",
-        "image": "https://www.digigrowth.se/wp-content/uploads/2020/09/small_konst.png"
+        "image": "/wp-content/uploads/2020/09/small_konst.png"
       }
     ]
   },
@@ -149,7 +149,7 @@
         "country": "Sweden"
       },
       "contact": {
-        "email": "hej@digigrowth.se",
+        "email": "${COMPANY_EMAIL}",
         "phone": ""
       }
     },
@@ -182,12 +182,12 @@
       "twitter": "",
       "facebook": ""
     },
-    "copyright": "Copyright © 2025 digigrowth.se. All rights reserved."
+    "copyright": "Copyright © 2025 ${SITE_NAME}. All rights reserved."
   },
   "seo": {
     "meta_title": "Digital Marknadsföring - Byrå med fokus",
     "meta_description": "Digital marknadsföringsbyrå med fokus på tillväxt. Bygg vidare och väx digitalt under 2025.",
-    "canonical_url": "https://www.digigrowth.se/",
+    "canonical_url": "${SITE_BASE_URL}/",
     "og_type": "website",
     "og_locale": "sv_SE"
   }

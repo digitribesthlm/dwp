@@ -209,10 +209,8 @@ export default async function Home() {
                       })}
                     </p>
                     <h3 className="text-xl font-bold mb-3 text-gray-900">
-                      <a 
-                        href={post.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
+                      <Link 
+                        href={`/${post.slug}`}
                         className="hover:text-blue-600"
                         dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                       />
@@ -221,14 +219,12 @@ export default async function Home() {
                       className="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed"
                       dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
                     />
-                    <a 
-                      href={post.link}
-                      target="_blank"
-                      rel="noopener noreferrer" 
+                    <Link 
+                      href={`/${post.slug}`}
                       className="text-blue-600 font-semibold hover:underline inline-flex items-center"
                     >
                       Läs mer →
-                    </a>
+                    </Link>
                   </div>
                 </article>
               ))}
