@@ -16,7 +16,7 @@
   },
   "mrr_section": {
     "title": "MRR PROCESS",
-    "intro_text": "Digigrowth är inte bara en marknadsföringsbyrå – vi är din strategiska partner i den digitala världen. Från Stockholm levererar vi globala lösningar som driver resultat. Vi erbjuder kompletta marknadsföringstekniklösningar som integrerar system, automatiserar processer och skalar dina marknadsföringsinsatser. Med vår djupa beteendekunskap och innovativa teknik skapar vi kostnadseffektiva lösningar som hjälper dig nå dina digitala mål.",
+    "intro_text": "${SITE_NAME} är inte bara en marknadsföringsbyrå – vi är din strategiska partner i den digitala världen. Från Stockholm levererar vi globala lösningar som driver resultat. Vi erbjuder kompletta marknadsföringstekniklösningar som integrerar system, automatiserar processer och skalar dina marknadsföringsinsatser. Med vår djupa beteendekunskap och innovativa teknik skapar vi kostnadseffektiva lösningar som hjälper dig nå dina digitala mål.",
     "cards": [
       {
         "id": 1,
@@ -140,7 +140,7 @@
   },
   "footer": {
     "company": {
-      "name": "Digi Growth STHLM",
+      "name": "${SITE_NAME}",
       "tagline": "Digital Marknadsföring - Byrå med fokus på enkelhet, sunt förnuft och aktivitet.",
       "address": {
         "street": "Jaktvarvsplan 3",

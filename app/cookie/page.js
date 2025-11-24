@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import { siteConfig } from '@/lib/siteConfig';
 
 export const metadata = {
-  title: `Cookiepolicy | ${siteConfig.name || 'Digigrowth'}`,
+  title: `Cookiepolicy | ${siteConfig.name || 'Your Site Name'}`,
   description: 'Information om hur vi använder cookies på vår webbplats.',
   alternates: {
     canonical: '/cookie/',

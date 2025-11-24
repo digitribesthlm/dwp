@@ -4,6 +4,7 @@ import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import { getHomepageData, getPageBySlug } from '../../lib/api';
 import { buildNavigationData, siteConfig } from '../../lib/siteConfig';
+import { normalizeWordPressUrl, normalizeHtmlUrls } from '../../lib/urlUtils';
 
 const buildMetadataFromPage = (page) => {
   const title = page?.title?.rendered?.replace(/<[^>]*>/g, '');
@@ -73,30 +74,41 @@ const extractServiceSections = (html) => {
   const services = [];
   let match;
 
+  // Get WordPress domain from environment
+  const wordPressDomain = process.env.WORDPRESS_API_URL?.replace('/wp-json/wp/v2', '').trim();
+  const siteDomain = process.env.SITE_BASE_URL;
+
   while ((match = regex.exec(html))) {
     const title = stripHtml(match[1]);
-    const bodyHtml = match[2].trim();
+    let bodyHtml = match[2].trim();
 
     if (!title || !bodyHtml) {
       continue;
     }
 
+    // Normalize all URLs in the HTML content
+    bodyHtml = normalizeHtmlUrls(bodyHtml, wordPressDomain, siteDomain);
+
     const linkMatch = bodyHtml.match(/href="([^"]+)"/i);
-    const slug = linkMatch ? getSlugFromLink(linkMatch[1]) : null;
+    let normalizedLink = linkMatch ? linkMatch[1] : null;
+
+    const slug = normalizedLink ? getSlugFromLink(normalizedLink) : null;
     services.push({
       title,
       bodyHtml,
       summary: stripHtml(bodyHtml).slice(0, 260),
-      link: linkMatch ? linkMatch[1] : null,
+      link: normalizedLink,
       slug,
     });
   }
 
   // If we successfully extracted services, return empty remainingHtml
   // to avoid displaying the same content twice
+  const remainingContent = services.length > 0 ? '' : html;
+
   return {
     services,
-    remainingHtml: services.length > 0 ? '' : html,
+    remainingHtml: remainingContent ? normalizeHtmlUrls(remainingContent, wordPressDomain, siteDomain) : remainingContent,
   };
 };
 

@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -40,5 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# markdown files
-*.md
+# internal documentation (not for public repo)
+ISSUES_ANALYSIS.md
+FIX_APPLIED_SUMMARY.md
+todo.md

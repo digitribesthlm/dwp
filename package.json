@@ -1,5 +1,5 @@
 {
-  "name": "headless-wp-nextjs",
+  "name": "headless-wordpress-nextjs-starter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^16.4.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
