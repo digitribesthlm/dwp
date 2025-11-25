@@ -234,13 +234,6 @@ export default async function ServiceDetail({ params }) {
                 dangerouslySetInnerHTML={{ __html: page?.excerpt?.rendered || '' }}
               />
             )}
-            <div className="flex flex-wrap gap-6 text-sm text-gray-300 mb-10">
-              <span>Publicerad {formatDate(page.date)}</span>
-              {page?.modified && (
-                <span>Senast uppdaterad {formatDate(page.modified)}</span>
-              )}
-              {authorName && <span>Av {authorName}</span>}
-            </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/kontakt/"
