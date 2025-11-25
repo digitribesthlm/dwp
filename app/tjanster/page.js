@@ -197,57 +197,68 @@ export default async function ServicesPage() {
 
 
         {services.length > 0 && (
-          <section className="py-20 bg-white">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="mb-12 text-center">
+          <section className="py-20 bg-gray-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="mb-16 text-center">
                 <p className="text-xs font-semibold tracking-[0.35em] text-blue-600 mb-4 uppercase">
                   Våra Tjänster
                 </p>
-                <h2 className="text-4xl font-bold text-gray-900">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                   Tjänster vi Erbjuder
                 </h2>
-                <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
+                <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto leading-relaxed">
                   Vi erbjuder ett brett utbud av digitala marknadsföringstjänster för att hjälpa ditt företag växa.
                 </p>
               </div>
-              <div className="grid gap-8 md:grid-cols-2">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {services.map((service) => (
                   <article
                     key={service.title}
-                    className="h-full bg-gray-50 border border-gray-100 rounded-3xl p-8 flex flex-col shadow-sm hover:shadow-lg transition"
+                    className="group h-full bg-white border border-gray-200 rounded-2xl p-8 flex flex-col shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                   >
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/10 text-blue-600 font-semibold">
+                    <div className="flex items-start gap-4 mb-6">
+                      <span className="flex-shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white font-bold text-lg shadow-sm">
                         {service.title.slice(0, 2).toUpperCase()}
                       </span>
-                      <h3 className="text-xl font-bold text-gray-900">{service.title}</h3>
+                      <h3 className="text-2xl font-bold text-gray-900 leading-tight">{service.title}</h3>
                     </div>
                     <div
-                      className="text-gray-700 text-sm leading-relaxed mb-6 flex-1"
+                      className="text-gray-700 text-base leading-relaxed mb-6 flex-1 [&>p]:mb-4 [&>p:last-child]:mb-0 [&>ul]:mb-4 [&>ul]:ml-4 [&>li]:mb-2"
                       dangerouslySetInnerHTML={{ __html: service.bodyHtml }}
                     />
-                    {service.slug ? (
-                      <Link
-                        href={`/digitala-tjanster/${service.slug}/`}
-                        className="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center gap-2"
-                      >
-                        Läs mer →
-                      </Link>
-                    ) : service.link ? (
-                      <Link
-                        href="/kontakt/"
-                        className="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center gap-2"
-                      >
-                        Kontakta oss →
-                      </Link>
-                    ) : (
-                      <Link
-                        href="/kontakt/"
-                        className="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center gap-2"
-                      >
-                        Prata med oss →
-                      </Link>
-                    )}
+                    <div className="pt-6 border-t border-gray-200">
+                      {service.slug ? (
+                        <Link
+                          href={`/digitala-tjanster/${service.slug}/`}
+                          className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 w-full text-center group-hover:shadow-md"
+                        >
+                          Läs mer
+                          <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      ) : service.link ? (
+                        <Link
+                          href="/kontakt/"
+                          className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 w-full text-center group-hover:shadow-md"
+                        >
+                          Kontakta oss
+                          <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      ) : (
+                        <Link
+                          href="/kontakt/"
+                          className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 w-full text-center group-hover:shadow-md"
+                        >
+                          Prata med oss
+                          <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      )}
+                    </div>
                   </article>
                 ))}
               </div>
@@ -256,8 +267,8 @@ export default async function ServicesPage() {
         )}
 
         {finalHtml && (
-          <section className="py-20 bg-white">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <section className="py-20 bg-gray-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <article
                 className="prose prose-lg max-w-none
                 prose-headings:text-gray-900 prose-headings:font-bold

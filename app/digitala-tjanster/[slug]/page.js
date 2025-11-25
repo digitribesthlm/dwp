@@ -31,6 +31,68 @@ const stripHtml = (html) =>
         .trim()
     : '';
 
+const parseContentIntoSections = (html) => {
+  if (!html) return [];
+
+  // Split content by h2 and h3 headings while preserving the headings
+  // This regex matches h2 or h3 tags and captures everything until the next heading or end
+  const headingRegex = /<h([23])[^>]*>(.*?)<\/h\1>/gi;
+  const sections = [];
+
+  let lastIndex = 0;
+  let match;
+  let introContent = '';
+
+  // First, collect all heading positions
+  const headings = [];
+  while ((match = headingRegex.exec(html)) !== null) {
+    headings.push({
+      level: match[1],
+      text: match[2],
+      fullMatch: match[0],
+      index: match.index,
+      endIndex: match.index + match[0].length
+    });
+  }
+
+  // If no headings found, return the entire content as one section
+  if (headings.length === 0) {
+    return [{
+      heading: '',
+      content: html,
+      headingLevel: ''
+    }];
+  }
+
+  // Get content before first heading as intro
+  if (headings[0].index > 0) {
+    introContent = html.substring(0, headings[0].index).trim();
+    if (introContent) {
+      sections.push({
+        heading: '',
+        content: introContent,
+        headingLevel: ''
+      });
+    }
+  }
+
+  // Process each heading and its content
+  headings.forEach((heading, index) => {
+    const nextHeading = headings[index + 1];
+    const contentStart = heading.endIndex;
+    const contentEnd = nextHeading ? nextHeading.index : html.length;
+    const content = html.substring(contentStart, contentEnd).trim();
+
+    sections.push({
+      heading: heading.fullMatch,
+      content: content,
+      headingLevel: `H${heading.level}`
+    });
+  });
+
+  return sections;
+};
+
 const getBreadcrumb = (slug) => [
   { label: 'Hem', href: '/' },
   { label: 'Tjänster', href: '/tjanster/' },
@@ -225,16 +287,36 @@ export default async function ServiceDetail({ params }) {
           </div>
         </section>
 
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-gray-50">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <article
-              className="prose prose-lg max-w-none
-                prose-headings:text-gray-900 prose-headings:font-bold
-                prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
-                prose-a:text-blue-600 hover:prose-a:underline
-                prose-ul:text-gray-700 prose-li:mb-2"
-              dangerouslySetInnerHTML={{ __html: pageContent }}
-            />
+            <div className="space-y-6">
+              {parseContentIntoSections(pageContent).map((section, index) => (
+                <article
+                  key={index}
+                  className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm"
+                >
+                  {section.heading && (
+                    <div
+                      className="prose prose-lg max-w-none mb-6
+                        prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mb-4"
+                      dangerouslySetInnerHTML={{ __html: section.heading }}
+                    />
+                  )}
+                  <div
+                    className="prose prose-lg max-w-none
+                      prose-headings:text-gray-900 prose-headings:font-bold
+                      prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4
+                      prose-a:text-blue-600 hover:prose-a:underline
+                      prose-ul:text-gray-700 prose-ul:list-disc prose-ul:ml-6
+                      prose-ol:text-gray-700 prose-ol:list-decimal prose-ol:ml-6
+                      prose-li:mb-2
+                      prose-strong:text-gray-900 prose-strong:font-semibold
+                      prose-img:rounded-lg prose-img:shadow-md"
+                    dangerouslySetInnerHTML={{ __html: section.content }}
+                  />
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       </main>
