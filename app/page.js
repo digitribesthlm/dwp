@@ -2,6 +2,7 @@ import { getHomepageData, getBlogPosts } from '../lib/api';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import Link from 'next/link';
+import Image from 'next/image';
 import { buildNavigationData, siteConfig } from '../lib/siteConfig';
 
 export async function generateMetadata() {
@@ -78,10 +79,14 @@ export default async function Home() {
         <section className="relative bg-gray-800 text-white py-32 md:py-40 overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0">
-            <img 
-              src={data.hero.background_image.url} 
+            <Image
+              src={data.hero.background_image.url}
               alt={data.hero.background_image.alt}
-              className="w-full h-full object-cover opacity-60"
+              fill
+              priority={true}
+              sizes="100vw"
+              className="object-cover opacity-60"
+              quality={85}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-gray-800/50"></div>
           </div>
@@ -116,17 +121,21 @@ export default async function Home() {
             
             <div className="grid md:grid-cols-3 gap-8">
               {data.mrr_section.cards.map((card) => (
-                <div 
-                  key={card.id} 
+                <div
+                  key={card.id}
                   className="bg-gray-50 p-8 rounded-lg hover:shadow-xl transition border border-gray-100"
                 >
                   {card.image && (
-                    <img 
-                      src={card.image} 
-                      alt={card.title}
-                      className="w-full h-auto mb-6 object-contain mx-auto"
-                      style={{ maxWidth: '353px', height: 'auto' }}
-                    />
+                    <div className="relative w-full mb-6 mx-auto" style={{ maxWidth: '353px', height: '353px' }}>
+                      <Image
+                        src={card.image}
+                        alt={card.title}
+                        width={353}
+                        height={353}
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, 353px"
+                      />
+                    </div>
                   )}
                   <p className="text-xs font-bold text-blue-600 mb-3 uppercase tracking-wide">
                     {card.tags}
@@ -155,16 +164,20 @@ export default async function Home() {
             
             <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
               {data.case_studies_section.studies.map((study) => (
-                <div 
-                  key={study.id} 
+                <div
+                  key={study.id}
                   className="bg-white rounded-lg shadow-sm hover:shadow-xl transition border border-gray-100 overflow-hidden"
                 >
                   {study.image && (
-                    <img 
-                      src={study.image} 
-                      alt={study.title}
-                      className="w-full h-40 object-cover"
-                    />
+                    <div className="relative w-full h-40">
+                      <Image
+                        src={study.image}
+                        alt={study.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
+                      />
+                    </div>
                   )}
                   <div className="p-6">
                     <p className="text-xs font-bold text-blue-600 mb-3 uppercase tracking-wide">
@@ -194,32 +207,36 @@ export default async function Home() {
               {blogPosts.map((post) => (
                 <article key={post.id} className="bg-white rounded-lg overflow-hidden hover:shadow-xl transition border border-gray-200">
                   {post._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
-                    <img 
-                      src={post?._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''}
-                      alt={post?.title?.rendered || 'Blog post'}
-                      className="w-full h-48 object-cover"
-                    />
+                    <div className="relative w-full h-48">
+                      <Image
+                        src={post?._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''}
+                        alt={post?.title?.rendered || 'Blog post'}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    </div>
                   )}
                   <div className="p-6">
                     <p className="text-xs text-gray-500 mb-2">
-                      {new Date(post.date).toLocaleDateString('sv-SE', { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
+                      {new Date(post.date).toLocaleDateString('sv-SE', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
                       })}
                     </p>
                     <h3 className="text-xl font-bold mb-3 text-gray-900">
-                      <Link 
+                      <Link
                         href={`/${post.slug}`}
                         className="hover:text-blue-600"
                         dangerouslySetInnerHTML={{ __html: post?.title?.rendered || '' }}
                       />
                     </h3>
-                    <div 
+                    <div
                       className="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed"
                       dangerouslySetInnerHTML={{ __html: post?.excerpt?.rendered || '' }}
                     />
-                    <Link 
+                    <Link
                       href={`/${post.slug}`}
                       className="text-blue-600 font-semibold hover:underline inline-flex items-center"
                     >
