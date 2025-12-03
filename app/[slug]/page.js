@@ -179,7 +179,7 @@ export default async function BlogPost({ params }) {
                 
                 {/* Post Content with green left border for first paragraph */}
                 <div 
-                  className="prose prose-lg max-w-none
+                  className="blog-post-content prose prose-lg max-w-none
                     prose-headings:font-bold prose-headings:text-gray-900
                     prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
                     prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6

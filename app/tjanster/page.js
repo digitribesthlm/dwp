@@ -270,11 +270,7 @@ export default async function ServicesPage() {
           <section className="py-20 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <article
-                className="prose prose-lg max-w-none
-                prose-headings:text-gray-900 prose-headings:font-bold
-                prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
-                prose-a:text-blue-600 hover:prose-a:underline
-                prose-ul:text-gray-700 prose-li:mb-2"
+                className="rich-text-content max-w-none"
                 dangerouslySetInnerHTML={{ __html: finalHtml }}
               />
             </div>

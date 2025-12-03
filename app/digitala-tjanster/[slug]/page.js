@@ -290,21 +290,12 @@ export default async function ServiceDetail({ params }) {
                 >
                   {section.heading && (
                     <div
-                      className="prose prose-lg max-w-none mb-6
-                        prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mb-4"
+                      className="rich-text-content max-w-none mb-6"
                       dangerouslySetInnerHTML={{ __html: section.heading }}
                     />
                   )}
                   <div
-                    className="prose prose-lg max-w-none
-                      prose-headings:text-gray-900 prose-headings:font-bold
-                      prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4
-                      prose-a:text-blue-600 hover:prose-a:underline
-                      prose-ul:text-gray-700 prose-ul:list-disc prose-ul:ml-6
-                      prose-ol:text-gray-700 prose-ol:list-decimal prose-ol:ml-6
-                      prose-li:mb-2
-                      prose-strong:text-gray-900 prose-strong:font-semibold
-                      prose-img:rounded-lg prose-img:shadow-md"
+                    className="rich-text-content max-w-none"
                     dangerouslySetInnerHTML={{ __html: section.content }}
                   />
                 </article>

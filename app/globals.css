@@ -95,3 +95,62 @@ h1, h2, h3, h4, h5, h6 {
   color: #1d4ed8;
   text-decoration: underline;
 }
+
+.blog-post-content,
+.rich-text-content {
+  color: #1f2937;
+  line-height: 1.8;
+}
+
+.blog-post-content h2,
+.rich-text-content h2 {
+  font-size: 1.75rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.blog-post-content h3,
+.rich-text-content h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.blog-post-content p,
+.rich-text-content p {
+  margin-bottom: 1.5rem;
+}
+
+.blog-post-content ul,
+.blog-post-content ol,
+.rich-text-content ul,
+.rich-text-content ol {
+  margin: 1.5rem 0 1.5rem 1.5rem;
+  padding-left: 1.25rem;
+  list-style-position: outside;
+}
+
+.blog-post-content ul,
+.rich-text-content ul {
+  list-style-type: disc;
+}
+
+.blog-post-content ol,
+.rich-text-content ol {
+  list-style-type: decimal;
+}
+
+.blog-post-content li,
+.rich-text-content li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-content li::marker,
+.rich-text-content li::marker {
+  color: #2563eb;
+  font-weight: 600;
+}
