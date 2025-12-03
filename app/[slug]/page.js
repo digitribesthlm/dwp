@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { notFound } from 'next/navigation';
 import { buildNavigationData, siteConfig } from '@/lib/siteConfig';
+import { normalizeAuthorName } from '@/lib/contentUtils';
 
 const stripHtml = (html) =>
   html ? html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim() : '';
@@ -71,7 +72,7 @@ export default async function BlogPost({ params }) {
   const relatedPosts = await getBlogPosts(3);
   
   const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url;
-  const author = post._embedded?.author?.[0]?.name || 'Sandra Ericsson';
+  const author = normalizeAuthorName(post._embedded?.author?.[0]?.name);
   const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'SEO';
   
   // Use frontend URL for sharing instead of WordPress URL

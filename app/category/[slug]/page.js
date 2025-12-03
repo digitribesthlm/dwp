@@ -4,6 +4,7 @@ import Navigation from '../../../components/Navigation';
 import Footer from '../../../components/Footer';
 import { getHomepageData, getCategoryBySlug, getPostsByCategory, getAllCategorySlugs } from '../../../lib/api';
 import { buildNavigationData, siteConfig } from '../../../lib/siteConfig';
+import { normalizeAuthorName } from '../../../lib/contentUtils';
 
 const stripHtml = (html) =>
   html ? html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim() : '';
@@ -115,8 +116,9 @@ export default async function CategoryPage({ params }) {
                 {posts.map((post) => {
                   const featuredImage =
                     post._embedded?.['wp:featuredmedia']?.[0]?.source_url;
-                  const author =
-                    post._embedded?.author?.[0]?.name || 'Sandra Ericsson';
+                  const author = normalizeAuthorName(
+                    post._embedded?.author?.[0]?.name
+                  );
                   const excerpt = stripHtml(post.excerpt?.rendered) || '';
 
                   return (
