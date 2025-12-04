@@ -14,6 +14,7 @@ export const metadata = {
 export default async function CookiePage() {
   const homepageData = await getHomepageData();
   const navigation = buildNavigationData(homepageData);
+  const contactEmail = homepageData?.footer?.company?.contact?.email || siteConfig.contactEmail || null;
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -49,7 +50,11 @@ export default async function CookiePage() {
                 Digi Growth Media<br />
                 Kungsholmen • Jaktvarvsplan 3<br />
                 Stockholm, Sweden<br />
-                <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail || 'integritet@digigrowth.se'}</a>
+                {contactEmail ? (
+                  <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+                ) : (
+                  <span>Kontakta oss via formuläret på hemsidan.</span>
+                )}
               </p>
               <p>Digi Growth Media är personuppgiftsansvarig för behandlingen av dina personuppgifter.</p>
 
@@ -86,7 +91,12 @@ export default async function CookiePage() {
                 <li>Återkalla samtycke när som helst</li>
               </ul>
               <p>
-                Kontakta oss på <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail || 'integritet@digigrowth.se'}</a>.
+                Kontakta oss på{' '}
+                {contactEmail ? (
+                  <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+                ) : (
+                  'vårt kontaktformulär.'
+                )}
                 Du kan även vända dig till Integritetsskyddsmyndigheten (IMY) vid klagomål.
               </p>
             </article>

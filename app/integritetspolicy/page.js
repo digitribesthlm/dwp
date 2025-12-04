@@ -50,7 +50,7 @@ const policySections = [
 export default async function IntegritetspolicyPage() {
   const homepageData = await getHomepageData();
   const navigation = buildNavigationData(homepageData);
-  const companyEmail = homepageData?.footer?.company?.contact?.email || siteConfig.contactEmail;
+  const companyEmail = homepageData?.footer?.company?.contact?.email || siteConfig.contactEmail || null;
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -94,13 +94,17 @@ export default async function IntegritetspolicyPage() {
                 Har du frågor om hur vi hanterar data eller vill du nyttja dina rättigheter? Kontakta oss så hjälper vi dig
                 inom 72 timmar.
               </p>
-              {companyEmail && (
+              {companyEmail ? (
                 <a
                   href={`mailto:${companyEmail}`}
                   className="inline-flex items-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
                 >
                   Mejla {companyEmail}
                 </a>
+              ) : (
+                <p className="text-sm text-gray-700">
+                  Använd kontaktformuläret så återkommer vi inom 72 timmar.
+                </p>
               )}
             </article>
           </div>
