@@ -1,0 +1,22 @@
+<svg width="640" height="860" viewBox="0 0 640 860" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="35%" stop-color="#0b3b5d"/>
+      <stop offset="100%" stop-color="#0d9488"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="860" rx="32" ry="32" fill="url(#bg)"/>
+  <g fill="#fff" font-family="Inter, Arial, sans-serif">
+    <text x="60" y="220" font-size="56" font-weight="700">5 STEG FÖR</text>
+    <text x="60" y="290" font-size="56" font-weight="700">FRAMTIDSSÄKER</text>
+    <text x="60" y="360" font-size="56" font-weight="700">MARKNADSFÖRING</text>
+    <text x="60" y="430" font-size="28" font-weight="600" fill="#a5f3fc">Trenderna inför 2026</text>
+    <text x="60" y="520" font-size="22" fill="#e0f2fe">
+      <tspan x="60" dy="0">Automatisering · AI-stödd personalisering</tspan>
+      <tspan x="60" dy="32">Nya köpbeteenden · Funnel som konverterar</tspan>
+    </text>
+  </g>
+  <text x="60" y="780" font-size="20" fill="#bae6fd" letter-spacing="4">DIGI GROWTH STHLM</text>
+</svg>
+

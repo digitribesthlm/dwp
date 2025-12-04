@@ -11,9 +11,15 @@ export default function Footer({ data }) {
   const email = company?.contact?.email || siteConfig.contactEmail;
   const tagline = company?.tagline || siteConfig.description || '';
   const address = company?.address || siteConfig.contactAddress;
-  const navItems = navigation?.primary?.length
-    ? navigation.primary
-    : siteConfig.navItems;
+  const navItems = (navigation?.primary?.length ? navigation.primary : siteConfig.navItems).filter(
+    (item) => {
+      const label = item?.label?.toLowerCase?.() || '';
+      const href = (item?.href || item?.url || '').toLowerCase();
+      const isPrivacyLabel = ['integritet', 'integritetspolicy', 'cookies', 'cookies & integritet'].includes(label);
+      const isPrivacyHref = href.includes('/integritet') || href.includes('/cookie');
+      return !isPrivacyLabel && !isPrivacyHref;
+    }
+  );
 
   return (
     <footer className="bg-gray-50 text-gray-900">
@@ -80,8 +86,17 @@ export default function Footer({ data }) {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-300 mt-8 pt-8 text-center text-gray-600 text-sm">
-          {copyright}
+        <div className="border-t border-gray-300 mt-8 pt-8 text-center text-gray-600 text-sm space-y-2">
+          <p>
+            <a href="/integritetspolicy/" className="text-blue-600 hover:underline">
+              Integritetspolicy
+            </a>{' '}
+            ·{' '}
+            <a href="/cookie/" className="text-blue-600 hover:underline">
+              Cookies
+            </a>
+          </p>
+          <p>{copyright}</p>
         </div>
       </div>
     </footer>

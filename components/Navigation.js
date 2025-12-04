@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { siteConfig } from '../lib/siteConfig';
 
 export default function Navigation({
-  brandName = 'Varumärke',
+  brandName = siteConfig.name || 'Digi Growth Media',
   menuItems = [],
   cta = { href: '/kontakt/', label: 'Kontakta oss' },
 }) {

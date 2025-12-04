@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 const maxCompetitors = 3;
 
@@ -404,6 +405,18 @@ export default function EvaluationWizard() {
           </button>
         )}
       </div>
+
+      <p className="mt-4 text-xs text-gray-500">
+        Vi behandlar uppgifterna enligt vår{' '}
+        <Link href="/integritetspolicy/" className="text-blue-600 hover:underline font-semibold">
+          integritetspolicy
+        </Link>{' '}
+        och{' '}
+        <Link href="/cookies-integritet/" className="text-blue-600 hover:underline font-semibold">
+          cookiepolicy
+        </Link>
+        .
+      </p>
     </div>
   );
 }

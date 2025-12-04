@@ -1,105 +1,103 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { siteConfig } from '@/lib/siteConfig';
+import { getHomepageData } from '@/lib/api';
+import { buildNavigationData, siteConfig } from '@/lib/siteConfig';
 
 export const metadata = {
-  title: `Cookiepolicy | ${siteConfig.name || 'Your Site Name'}`,
-  description: 'Information om hur vi använder cookies på vår webbplats.',
+  title: `Integritet & Cookies | ${siteConfig.name || 'Your Site Name'}`,
+  description: 'Allt om hur vi använder cookies och behandlar personuppgifter.',
   alternates: {
     canonical: '/cookie/',
   },
 };
 
 export default async function CookiePage() {
-  // Fetch homepage data for footer
-  const { getHomepageData } = await import('@/lib/api');
   const homepageData = await getHomepageData();
+  const navigation = buildNavigationData(homepageData);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navigation />
-      
+    <div className="min-h-screen flex flex-col bg-white">
+      <Navigation {...navigation} />
+
       <main className="flex-grow">
-        {/* Hero Section */}
         <section className="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="uppercase tracking-[0.35em] text-blue-200 text-xs font-semibold mb-3">
+              Integritet
+            </p>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Cookiepolicy
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 max-w-3xl">
-              Information om hur vi använder cookies och liknande tekniker på vår webbplats
+              Här beskriver vi hur vi använder cookies och behandlar personuppgifter när du beställer analyser och rapporter.
             </p>
           </div>
         </section>
 
-        {/* Content Section */}
         <section className="py-20 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <article className="rich-text-content max-w-none">
-              
-              <h2>Vad är cookies?</h2>
+              <h2>1. Inledning</h2>
               <p>
-                Cookies är små textfiler som lagras på din enhet när du besöker en webbplats. 
-                De hjälper webbplatsen att komma ihåg dina preferenser och förbättra din användarupplevelse.
+                Välkommen till Digi Growth Media! Vi värnar om din personliga integritet och strävar efter att skydda dina personuppgifter på bästa sätt.
+                Denna policy förklarar hur vi samlar in, använder, delar och skyddar dina uppgifter när du besöker vår webbplats och använder våra tjänster,
+                särskilt när du beställer en kostnadsfri analys eller laddar ned våra rapporter.
               </p>
 
-              <h2>Hur använder vi cookies?</h2>
+              <h2>2. Vem är ansvarig för dina personuppgifter?</h2>
               <p>
-                Vi använder cookies för att:
+                Digi Growth Media<br />
+                Kungsholmen • Jaktvarvsplan 3<br />
+                Stockholm, Sweden<br />
+                <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail || 'integritet@digigrowth.se'}</a>
               </p>
+              <p>Digi Growth Media är personuppgiftsansvarig för behandlingen av dina personuppgifter.</p>
+
+              <h2>3. Vilka uppgifter samlar vi in?</h2>
               <ul>
-                <li>Förbättra webbplatsens funktionalitet och prestanda</li>
-                <li>Analysera hur besökare använder vår webbplats</li>
-                <li>Komma ihåg dina preferenser och inställningar</li>
-                <li>Förstå hur våra marknadsföringsinsatser fungerar</li>
+                <li>Uppgifter du frivilligt lämnar, t.ex. namn, e-post, telefon och företag.</li>
+                <li>Hemsideadress och konkurrents domän för att kunna genomföra din beställda analys.</li>
+                <li>Teknisk data som webbläsartyp och operativsystem för att förbättra säkerhet och upplevelse.</li>
               </ul>
 
-              <h2>Typer av cookies vi använder</h2>
-              
-              <h3>Nödvändiga cookies</h3>
-              <p>
-                Dessa cookies är nödvändiga för att webbplatsen ska fungera korrekt. 
-                De kan inte stängas av i våra system.
-              </p>
-
-              <h3>Analyscookies</h3>
-              <p>
-                Vi använder analyscookies för att förstå hur besökare interagerar med vår webbplats. 
-                Detta hjälper oss att förbättra användarupplevelsen.
-              </p>
-
-              <h3>Marknadsföringscookies</h3>
-              <p>
-                Dessa cookies används för att visa relevant reklam och mäta effektiviteten av våra 
-                marknadsföringskampanjer.
-              </p>
-
-              <h2>Hantera cookies</h2>
-              <p>
-                Du kan när som helst ändra dina cookie-inställningar genom din webbläsare. 
-                Observera att om du blockerar vissa cookies kan det påverka funktionaliteten på vår webbplats.
-              </p>
-              <p>
-                Läs mer om hur du hanterar cookies i din webbläsare:
-              </p>
+              <h2>4. Varför samlar vi in uppgifterna?</h2>
               <ul>
-                <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
-                <li><a href="https://support.mozilla.org/sv/kb/aktivera-och-inaktivera-kakor" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
-                <li><a href="https://support.apple.com/sv-se/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari</a></li>
-                <li><a href="https://support.microsoft.com/sv-se/microsoft-edge/ta-bort-cookies-i-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer">Microsoft Edge</a></li>
+                <li><strong>Tjänsteleverans:</strong> Skapa och skicka rapporter/analyser du beställt (laglig grund: avtal).</li>
+                <li><strong>Kommunikation:</strong> Följa upp rapporten och presentera samarbetesförslag (laglig grund: berättigat intresse).</li>
+                <li><strong>Marknadsföring:</strong> Utskick av nyhetsbrev efter uttryckligt samtycke (laglig grund: samtycke).</li>
+                <li><strong>Utveckling:</strong> Analysera teknisk data för att förbättra webbplatsen (laglig grund: berättigat intresse).</li>
               </ul>
 
-              <h2>Uppdateringar av denna policy</h2>
+              <h2>5. Hur länge sparas uppgifterna?</h2>
               <p>
-                Vi kan komma att uppdatera denna cookiepolicy från tid till annan. 
-                Eventuella ändringar publiceras på denna sida.
+                Uppgifter kopplade till en analys sparas normalt i 12 månader efter leverans. Därefter raderas eller anonymiseras datan.
+                Om du blir kund sparas information i enlighet med kundavtal och bokföringslagen.
               </p>
 
-              <h2>Kontakta oss</h2>
+              <h2>6. Delning med tredje part</h2>
+              <p>Vi säljer aldrig dina uppgifter. Vi använder enbart betrodda leverantörer för e-post, analys och lagring som följer GDPR och säkerhetskrav.</p>
+
+              <h2>7. Dina rättigheter</h2>
+              <ul>
+                <li>Få tillgång till dina uppgifter (registerutdrag)</li>
+                <li>Begära rättelse eller radering</li>
+                <li>Invända mot behandling baserad på berättigat intresse</li>
+                <li>Be om dataportabilitet</li>
+                <li>Återkalla samtycke när som helst</li>
+              </ul>
               <p>
-                Om du har frågor om vår användning av cookies, vänligen kontakta oss på{' '}
-                <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>.
+                Kontakta oss på <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail || 'integritet@digigrowth.se'}</a>.
+                Du kan även vända dig till Integritetsskyddsmyndigheten (IMY) vid klagomål.
               </p>
+            </article>
+
+            <article className="rich-text-content max-w-none">
+              <h2>Cookies</h2>
+              <p>
+                Cookies är små textfiler som lagras i din webbläsare. Vi använder dem för att hemsidan ska fungera, för att analysera trafik och för att förbättra
+                upplevelsen. Du kan hantera cookies i din webbläsare genom att rensa historik eller blockera spårning. Observera att vissa funktioner kan sluta fungera utan cookies.
+              </p>
+              <p>För detaljerade instruktioner, besök respektive webbläsares supportsida (Chrome, Firefox, Safari, Edge).</p>
             </article>
           </div>
         </section>
