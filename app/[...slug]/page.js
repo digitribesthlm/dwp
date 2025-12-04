@@ -11,14 +11,16 @@ const stripHtml = (html) =>
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const slugArray = Array.isArray(slug) ? slug : [slug];
+  const actualSlug = slugArray[slugArray.length - 1];
+  const post = await getBlogPostBySlug(actualSlug);
   const siteName = siteConfig.name;
 
   if (!post) {
     return {
       title: `${siteName}`,
       description: siteConfig.description || 'Inlägg saknas.',
-      alternates: { canonical: `/${slug}/` },
+      alternates: { canonical: `/${slugArray.join('/')}/` },
     };
   }
 
@@ -32,12 +34,12 @@ export async function generateMetadata({ params }) {
     title: `${plainTitle} | ${siteName}`,
     description: plainExcerpt,
     alternates: {
-      canonical: `/${slug}/`,
+      canonical: `/${slugArray.join('/')}/`,
     },
     openGraph: {
       title: plainTitle,
       description: plainExcerpt,
-      url: `${siteConfig.baseUrl}/${slug}/`,
+      url: `${siteConfig.baseUrl}/${slugArray.join('/')}/`,
       type: 'article',
       siteName,
       images: image
@@ -62,18 +64,18 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogPost({ params }) {
   const { slug } = await params;
+  const slugArray = Array.isArray(slug) ? slug : [slug];
   
-  // Handle category-prefixed URLs like /digital-strategi/post-slug/
   // Extract the last segment as the actual slug (WordPress stores posts by slug, not full path)
-  const slugParts = slug.split('/').filter(Boolean);
-  const actualSlug = slugParts.length > 0 ? slugParts[slugParts.length - 1] : slug;
+  const actualSlug = slugArray[slugArray.length - 1];
   
   // Try to find the post with the extracted slug
   let post = await getBlogPostBySlug(actualSlug);
   
-  // If not found, try the full slug as-is (for backwards compatibility)
-  if (!post && slug !== actualSlug) {
-    post = await getBlogPostBySlug(slug);
+  // If not found, try joining all segments as a slug (for backwards compatibility)
+  if (!post && slugArray.length > 1) {
+    const joinedSlug = slugArray.join('-');
+    post = await getBlogPostBySlug(joinedSlug);
   }
   
   if (!post) {
@@ -89,7 +91,7 @@ export default async function BlogPost({ params }) {
   const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'SEO';
   
   // Use frontend URL for sharing instead of WordPress URL
-  const publicUrl = `${siteConfig.baseUrl}/${slug}/`;
+  const publicUrl = `${siteConfig.baseUrl}/${slugArray.join('/')}/`;
   
   // Calculate reading time (rough estimate: 200 words per minute)
   const wordCount = post?.content?.rendered?.split(/\s+/).length || 0;
@@ -226,21 +228,23 @@ export default async function BlogPost({ params }) {
                       </a>
                     ))}
                   </div>
-                  <div className="mt-8 rounded-2xl border border-blue-100 bg-blue-50 p-5">
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-600">
-                      Rapport
+
+                  {/* Trend Report CTA */}
+                  <div className="mt-8 rounded-2xl border border-blue-100 bg-blue-50 p-6">
+                    <p className="text-xs font-semibold tracking-[0.25em] uppercase text-blue-600 mb-2">
+                      Trendrapport
                     </p>
-                    <h4 className="text-base font-bold text-gray-900 mt-2">
-                      Framtidssäkra din marknadsföring 2026
+                    <h4 className="text-lg font-bold text-gray-900 mb-2">
+                      Framtidssäkra din marknadsföring – Trender 2026
                     </h4>
-                    <p className="text-sm text-gray-600 mt-2">
-                      Ladda ned trendrapporten med fem fokusområden och få inspiration inför 2026.
+                    <p className="text-sm text-gray-700 mb-4">
+                      Ladda ned trendrapporten med fem nyckelområden och få inspiration inför 2026.
                     </p>
                     <Link
                       href="/framtidssakra/"
                       className="mt-4 inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700"
                     >
-                      Hämta rapporten →
+                      Ladda ned rapporten →
                     </Link>
                   </div>
                 </div>
@@ -254,3 +258,4 @@ export default async function BlogPost({ params }) {
     </>
   );
 }
+
