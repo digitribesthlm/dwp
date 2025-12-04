@@ -95,8 +95,7 @@ const parseContentIntoSections = (html) => {
 
 const getBreadcrumb = (slug) => [
   { label: 'Hem', href: '/' },
-  { label: 'Tjänster', href: '/tjanster/' },
-  { label: 'Digitala tjänster', href: '/tjanster/#tjanster' },
+  { label: 'Digitala tjänster', href: '/digitala-tjanster/' },
   { label: slug.replace(/-/g, ' ') },
 ];
 
@@ -242,7 +241,7 @@ export default async function ServiceDetail({ params }) {
                 Ta kontakt
               </Link>
               <Link
-                href="/tjanster/"
+                href="/digitala-tjanster/"
                 className="inline-flex items-center justify-center bg-white/10 text-white px-8 py-3 rounded-md text-lg font-semibold backdrop-blur hover:bg-white/20 transition"
               >
                 Alla tjänster
