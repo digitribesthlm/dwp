@@ -1,6 +1,7 @@
 import { getBlogPostBySlug, getBlogPosts, getHomepageData } from '@/lib/api';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { buildNavigationData, siteConfig } from '@/lib/siteConfig';
 import { normalizeAuthorName } from '@/lib/contentUtils';
@@ -212,6 +213,23 @@ export default async function BlogPost({ params }) {
                         />
                       </a>
                     ))}
+                  </div>
+                  <div className="mt-8 rounded-2xl border border-blue-100 bg-blue-50 p-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-600">
+                      Rapport
+                    </p>
+                    <h4 className="text-base font-bold text-gray-900 mt-2">
+                      Framtidssäkra din marknadsföring 2026
+                    </h4>
+                    <p className="text-sm text-gray-600 mt-2">
+                      Ladda ned guiden med våra fem steg och få en konkret plan för nästa kampanj.
+                    </p>
+                    <Link
+                      href="/framtidssakra/"
+                      className="mt-4 inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700"
+                    >
+                      Hämta rapporten →
+                    </Link>
                   </div>
                 </div>
               </aside>
