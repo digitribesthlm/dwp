@@ -60,7 +60,7 @@ export default async function HomepageEvaluationPage() {
                 Trestegsprocess
               </p>
               <h2 className="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
-                Besvara tre frågor – få en konkret rapport
+                Besvara tre frågor – få en trendrapport med rekommendationer
               </h2>
               <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
                 Vi hämtar offentliga data, annonsbibliotek, sökresultat och mjuka signaler från

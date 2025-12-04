@@ -222,7 +222,7 @@ export default async function BlogPost({ params }) {
                       Framtidssäkra din marknadsföring 2026
                     </h4>
                     <p className="text-sm text-gray-600 mt-2">
-                      Ladda ned guiden med våra fem steg och få en konkret plan för nästa kampanj.
+                      Ladda ned trendrapporten med fem fokusområden och få inspiration inför 2026.
                     </p>
                     <Link
                       href="/framtidssakra/"

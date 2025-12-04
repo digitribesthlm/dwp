@@ -48,9 +48,8 @@ export default async function FramtidssakraReportPage() {
                   Framtidssäkra din marknadsföring – Trender 2026
                 </h1>
                 <p className="mt-6 text-lg text-gray-600 leading-relaxed">
-                  Beställ vår exklusiva rapport och få en konkret handlingsplan för hur du säkrar ditt varumärke,
-                  funnel och growth stack mot kommande köpbeteenden. Vi sammanfattar AI-skiften, attribution,
-                  samt vilka åtgärder som driver pipeline just nu.
+                  Beställ vår trendrapport och få en komprimerad lägesbild av vilka beteenden, kanaler och tekniker som påverkar marknadsföring under 2026.
+                  Du får strategiska rekommendationer och checklistor som hjälper dig prioritera nästa initiativ.
                 </p>
                 <ul className="mt-6 space-y-3 text-gray-800">
                   <li>• 5 nyckelområden du måste optimera under 2026</li>
