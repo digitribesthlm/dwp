@@ -16,22 +16,28 @@ const trafficOptions = [
 const steps = [
   {
     title: 'Din webbplats',
-    description: 'Ange domänen du vill analysera. Vi kontrollerar tekniska signaler, budskap och konverteringsflöden.',
+    description:
+      'Ange domänen du vill analysera. Vi kontrollerar tekniska signaler, budskap och konverteringsflöden.',
   },
   {
-    title: 'Konkurrenter & trafik',
-    description: 'Lägg till upp till tre konkurrenter och markera vilka trafikkällor de förlitar sig på just nu.',
+    title: 'Konkurrenter',
+    description:
+      'Lägg till upp till tre konkurrenter vi ska ställa mot. Räcker med domän eller företagsnamn.',
+  },
+  {
+    title: 'Trafikkällor just nu',
+    description:
+      'Markera var ni syns idag. Det hjälper oss att förstå nuvarande mix (annonser, SEO, e-post m.m.).',
   },
   {
     title: 'Leverans & rapport',
-    description: 'Vi skickar en prioriterad rapport till din inkorg och delar nästa steg via mail.',
+    description: 'Vi skickar rapporten till din inkorg och delar rekommenderat nästa steg.',
   },
 ];
 
 const createCompetitor = () => ({
   id: Math.random().toString(36).slice(2, 10),
   name: '',
-  trafficSources: [],
 });
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -40,6 +46,7 @@ export default function EvaluationWizard() {
   const [step, setStep] = useState(0);
   const [domain, setDomain] = useState('');
   const [competitors, setCompetitors] = useState([createCompetitor()]);
+  const [trafficSources, setTrafficSources] = useState([]);
   const [email, setEmail] = useState('');
   const [notes, setNotes] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -50,9 +57,8 @@ export default function EvaluationWizard() {
     name: competitor.name?.trim(),
   }));
 
-  const hasAtLeastOneCompetitor = normalizedCompetitors.some(
-    (competitor) => competitor.name
-  );
+  const hasAtLeastOneCompetitor = normalizedCompetitors.some((competitor) => competitor.name);
+  const hasTrafficSources = trafficSources.length > 0;
 
   const canProceed = () => {
     if (step === 0) {
@@ -62,6 +68,9 @@ export default function EvaluationWizard() {
       return hasAtLeastOneCompetitor;
     }
     if (step === 2) {
+      return hasTrafficSources;
+    }
+    if (step === 3) {
       return emailPattern.test(email.trim());
     }
     return false;
@@ -85,12 +94,10 @@ export default function EvaluationWizard() {
     );
   };
 
-  const toggleTrafficSource = (index, source) => {
-    updateCompetitor(index, {
-      trafficSources: competitors[index].trafficSources.includes(source)
-        ? competitors[index].trafficSources.filter((item) => item !== source)
-        : [...competitors[index].trafficSources, source],
-    });
+  const toggleTrafficSource = (source) => {
+    setTrafficSources((prev) =>
+      prev.includes(source) ? prev.filter((item) => item !== source) : [...prev, source]
+    );
   };
 
   const handleAddCompetitor = () => {
@@ -101,7 +108,7 @@ export default function EvaluationWizard() {
 
   const handleRemoveCompetitor = (index) => {
     if (competitors.length === 1) {
-      updateCompetitor(0, { name: '', trafficSources: [] });
+      updateCompetitor(0, { name: '' });
       return;
     }
     setCompetitors((prev) => prev.filter((_, idx) => idx !== index));
@@ -119,10 +126,10 @@ export default function EvaluationWizard() {
         .filter((competitor) => competitor.name)
         .map((competitor) => ({
           name: competitor.name,
-          trafficSources: competitor.trafficSources,
         })),
       email: email.trim(),
       notes: notes.trim(),
+      trafficSources,
     };
 
     try {
@@ -144,6 +151,7 @@ export default function EvaluationWizard() {
       setStep(0);
       setDomain('');
       setCompetitors([createCompetitor()]);
+      setTrafficSources([]);
       setEmail('');
       setNotes('');
     } catch (error) {
@@ -181,9 +189,12 @@ export default function EvaluationWizard() {
       return (
         <div className="space-y-6">
           {competitors.map((competitor, index) => (
-            <div key={competitor.id} className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+            <div
+              key={competitor.id}
+              className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm"
+            >
               <div className="flex items-start gap-3">
-                <div className="flex-1 space-y-4">
+                <div className="flex-1">
                   <label className="block">
                     <span className="text-sm font-semibold text-gray-900">
                       Konkurrent {index + 1} {index === 0 ? '*' : ''}
@@ -191,33 +202,12 @@ export default function EvaluationWizard() {
                     <input
                       type="text"
                       value={competitor.name}
-                      placeholder="konkurrent.se"
+                      placeholder="konkurrent.se eller företagsnamn"
                       onChange={(event) => updateCompetitor(index, { name: event.target.value })}
                       className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                     />
                   </label>
-
-                  <div>
-                    <span className="text-sm font-semibold text-gray-900">Nuvarande trafikkällor</span>
-                    <div className="mt-3 grid gap-2 md:grid-cols-2">
-                      {trafficOptions.map((option) => (
-                        <label
-                          key={option.value}
-                          className="flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-700"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={competitor.trafficSources.includes(option.value)}
-                            onChange={() => toggleTrafficSource(index, option.value)}
-                            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                          />
-                          {option.label}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
                 </div>
-
                 <button
                   type="button"
                   onClick={() => handleRemoveCompetitor(index)}
@@ -245,6 +235,37 @@ export default function EvaluationWizard() {
       );
     }
 
+    if (step === 2) {
+      return (
+        <div className="space-y-4">
+          <p className="text-sm text-gray-600">
+            Markera de kanaler ni använder idag. Vi använder dem för att se hur mixen skiljer sig mot
+            konkurrenterna och identifiera hål i tratten.
+          </p>
+          <div className="grid gap-3 md:grid-cols-2">
+            {trafficOptions.map((option) => (
+              <label
+                key={option.value}
+                className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-sm font-semibold ${
+                  trafficSources.includes(option.value)
+                    ? 'border-blue-200 bg-blue-50 text-blue-900'
+                    : 'border-gray-200 bg-white text-gray-700'
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={trafficSources.includes(option.value)}
+                  onChange={() => toggleTrafficSource(option.value)}
+                  className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                {option.label}
+              </label>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
@@ -260,18 +281,29 @@ export default function EvaluationWizard() {
                 {normalizedCompetitors.filter((competitor) => competitor.name).map((competitor) => (
                   <div key={competitor.id} className="rounded-xl bg-gray-50 px-4 py-2">
                     <p className="font-semibold text-gray-900">{competitor.name}</p>
-                    {competitor.trafficSources.length > 0 ? (
-                      <p className="text-xs text-gray-600">
-                        Trafik: {competitor.trafficSources.length === trafficOptions.length ? 'Blandat' : competitor.trafficSources.map((source) => {
-                          const option = trafficOptions.find((item) => item.value === source);
-                          return option?.label || source;
-                        }).join(', ')}
-                      </p>
-                    ) : (
-                      <p className="text-xs text-gray-500">Inga trafikkällor markerade</p>
-                    )}
                   </div>
                 ))}
+              </dd>
+            </div>
+
+            <div>
+              <dt className="font-medium text-gray-500">Trafikkällor</dt>
+              <dd className="mt-2 flex flex-wrap gap-2">
+                {trafficSources.length > 0 ? (
+                  trafficSources.map((source) => {
+                    const option = trafficOptions.find((item) => item.value === source);
+                    return (
+                      <span
+                        key={source}
+                        className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700"
+                      >
+                        {option?.label || source}
+                      </span>
+                    );
+                  })
+                ) : (
+                  <span className="text-xs text-gray-500">Inga källor markerade</span>
+                )}
               </dd>
             </div>
           </dl>

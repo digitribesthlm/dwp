@@ -4,16 +4,21 @@ const WEBHOOK_URL = process.env.WEBHOOK_HOMEPAGE_EVALUATION;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const trafficSourcesLimit = 10;
+
 const sanitizeCompetitors = (competitors) =>
   (Array.isArray(competitors) ? competitors : [])
     .slice(0, 3)
     .map((competitor) => ({
       name: competitor?.name?.trim(),
-      trafficSources: Array.isArray(competitor?.trafficSources)
-        ? competitor.trafficSources.map((source) => String(source).trim()).filter(Boolean)
-        : [],
     }))
     .filter((competitor) => competitor.name);
+
+const sanitizeTrafficSources = (sources) =>
+  (Array.isArray(sources) ? sources : [])
+    .map((source) => String(source).trim())
+    .filter(Boolean)
+    .slice(0, trafficSourcesLimit);
 
 export async function POST(request) {
   try {
@@ -22,6 +27,7 @@ export async function POST(request) {
     const email = body?.email?.trim();
     const notes = body?.notes?.trim();
     const competitors = sanitizeCompetitors(body?.competitors);
+    const trafficSources = sanitizeTrafficSources(body?.trafficSources);
 
     if (!domain) {
       return NextResponse.json({ error: 'Domän krävs.' }, { status: 400 });
@@ -30,6 +36,13 @@ export async function POST(request) {
     if (!competitors.length) {
       return NextResponse.json(
         { error: 'Minst en konkurrent behövs för att göra jämförelsen.' },
+        { status: 400 }
+      );
+    }
+
+    if (!trafficSources.length) {
+      return NextResponse.json(
+        { error: 'Markera minst en trafikkälla för att vi ska kunna göra analysen.' },
         { status: 400 }
       );
     }
@@ -51,6 +64,7 @@ export async function POST(request) {
       email,
       notes: notes || null,
       competitors,
+      trafficSources,
       submittedAt: new Date().toISOString(),
       userAgent: request.headers.get('user-agent'),
       source: 'homepage-evaluation',
