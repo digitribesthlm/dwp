@@ -1,4 +1,4 @@
-import { getBlogPostBySlug, getBlogPosts, getHomepageData } from '@/lib/api';
+import { getBlogPostBySlug, getBlogPosts, getHomepageData, getPageBySlug } from '@/lib/api';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
@@ -14,20 +14,22 @@ export async function generateMetadata({ params }) {
   const slugArray = Array.isArray(slug) ? slug : [slug];
   const actualSlug = slugArray[slugArray.length - 1];
   const post = await getBlogPostBySlug(actualSlug);
+  const page = post ? null : await getPageBySlug(actualSlug);
   const siteName = siteConfig.name;
 
-  if (!post) {
+  if (!post && !page) {
     return {
       title: `${siteName}`,
-      description: siteConfig.description || 'Inlägg saknas.',
+      description: siteConfig.description || 'Sidan saknas.',
       alternates: { canonical: `/${slugArray.join('/')}/` },
     };
   }
 
-  const plainTitle = stripHtml(post.title?.rendered) || siteName;
-  const plainExcerpt = stripHtml(post.excerpt?.rendered) || siteConfig.description;
+  const content = post || page;
+  const plainTitle = stripHtml(content.title?.rendered) || siteName;
+  const plainExcerpt = stripHtml(content.excerpt?.rendered || content.content?.rendered) || siteConfig.description;
   const image =
-    post._embedded?.['wp:featuredmedia']?.[0]?.source_url || siteConfig.defaultOgImage;
+    content._embedded?.['wp:featuredmedia']?.[0]?.source_url || siteConfig.defaultOgImage;
 
   return {
     metadataBase: new URL(siteConfig.baseUrl),
@@ -40,7 +42,7 @@ export async function generateMetadata({ params }) {
       title: plainTitle,
       description: plainExcerpt,
       url: `${siteConfig.baseUrl}/${slugArray.join('/')}/`,
-      type: 'article',
+      type: post ? 'article' : 'website',
       siteName,
       images: image
         ? [
@@ -78,20 +80,74 @@ export default async function BlogPost({ params }) {
     post = await getBlogPostBySlug(joinedSlug);
   }
   
+  // If no post found, check if it's a WordPress page
+  let page = null;
   if (!post) {
+    page = await getPageBySlug(actualSlug);
+    if (!page && slugArray.length > 1) {
+      const joinedSlug = slugArray.join('-');
+      page = await getPageBySlug(joinedSlug);
+    }
+  }
+  
+  if (!post && !page) {
     notFound();
   }
   
   const homepageData = await getHomepageData();
   const navigation = buildNavigationData(homepageData);
   const relatedPosts = await getBlogPosts(3);
+  const publicUrl = `${siteConfig.baseUrl}/${slugArray.join('/')}/`;
   
+  // Render WordPress page (simpler layout)
+  if (page) {
+    const pageFeaturedImage = page._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+    
+    return (
+      <>
+        <Navigation {...navigation} />
+        
+        <main className="bg-white">
+          <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="max-w-4xl mx-auto">
+              <h1 
+                className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight"
+                dangerouslySetInnerHTML={{ __html: page.title.rendered }}
+              />
+              
+              {pageFeaturedImage && (
+                <img 
+                  src={pageFeaturedImage}
+                  alt={page?.title?.rendered || 'Page'}
+                  className="w-full h-auto mb-8 rounded-lg"
+                />
+              )}
+              
+              <div 
+                className="rich-text-content prose prose-lg max-w-none
+                  prose-headings:font-bold prose-headings:text-gray-900
+                  prose-h2:text-3xl prose-h2:mt-8 prose-h2:mb-4
+                  prose-h3:text-2xl prose-h3:mt-6 prose-h3:mb-3
+                  prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
+                  prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                  prose-strong:text-gray-900 prose-strong:font-semibold
+                  prose-ul:text-gray-700 prose-ol:text-gray-700
+                  prose-li:mb-2"
+                dangerouslySetInnerHTML={{ __html: page.content?.rendered || '' }}
+              />
+            </div>
+          </article>
+        </main>
+        
+        <Footer data={homepageData.footer} />
+      </>
+    );
+  }
+  
+  // Render blog post (existing layout)
   const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url;
   const author = normalizeAuthorName(post._embedded?.author?.[0]?.name);
   const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'SEO';
-  
-  // Use frontend URL for sharing instead of WordPress URL
-  const publicUrl = `${siteConfig.baseUrl}/${slugArray.join('/')}/`;
   
   // Calculate reading time (rough estimate: 200 words per minute)
   const wordCount = post?.content?.rendered?.split(/\s+/).length || 0;
