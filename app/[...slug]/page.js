@@ -103,13 +103,19 @@ export default async function BlogPost({ params }) {
   if (page) {
     const pageFeaturedImage = page._embedded?.['wp:featuredmedia']?.[0]?.source_url;
     
-    // Remove the first h1 and "Default Subtitle" from content if they exist
+    // Clean up WordPress page content
     let pageContent = page.content?.rendered || '';
     if (pageContent) {
       // Remove first h1 tag and its content
       pageContent = pageContent.replace(/<h1[^>]*>.*?<\/h1>/i, '');
-      // Remove "Default Subtitle" paragraph if it exists
-      pageContent = pageContent.replace(/<p[^>]*>Default Subtitle<\/p>/i, '');
+      // Remove "Default Subtitle" in various formats
+      pageContent = pageContent.replace(/<p[^>]*>\s*Default Subtitle\s*<\/p>/gi, '');
+      pageContent = pageContent.replace(/<div[^>]*>\s*Default Subtitle\s*<\/div>/gi, '');
+      pageContent = pageContent.replace(/Default Subtitle/gi, '');
+      // Remove script tags and their content
+      pageContent = pageContent.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+      // Remove any remaining jQuery/document.ready code blocks
+      pageContent = pageContent.replace(/\$\(document\)\.ready\([^)]*\)[\s\S]*?\}\);?/gi, '');
     }
     
     return (
