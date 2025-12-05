@@ -103,6 +103,15 @@ export default async function BlogPost({ params }) {
   if (page) {
     const pageFeaturedImage = page._embedded?.['wp:featuredmedia']?.[0]?.source_url;
     
+    // Remove the first h1 and "Default Subtitle" from content if they exist
+    let pageContent = page.content?.rendered || '';
+    if (pageContent) {
+      // Remove first h1 tag and its content
+      pageContent = pageContent.replace(/<h1[^>]*>.*?<\/h1>/i, '');
+      // Remove "Default Subtitle" paragraph if it exists
+      pageContent = pageContent.replace(/<p[^>]*>Default Subtitle<\/p>/i, '');
+    }
+    
     return (
       <>
         <Navigation {...navigation} />
@@ -133,7 +142,7 @@ export default async function BlogPost({ params }) {
                   prose-strong:text-gray-900 prose-strong:font-semibold
                   prose-ul:text-gray-700 prose-ol:text-gray-700
                   prose-li:mb-2"
-                dangerouslySetInnerHTML={{ __html: page.content?.rendered || '' }}
+                dangerouslySetInnerHTML={{ __html: pageContent }}
               />
             </div>
           </article>
