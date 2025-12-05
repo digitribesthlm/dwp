@@ -118,8 +118,20 @@ export default async function BlogPost({ params }) {
       pageContent = pageContent.replace(/Default Subtitle/gi, '');
       // Remove script tags and their content
       pageContent = pageContent.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
-      // Remove any remaining jQuery/document.ready code blocks
-      pageContent = pageContent.replace(/\$\(document\)\.ready\([^)]*\)[\s\S]*?\}\);?/gi, '');
+      // Remove jQuery/document.ready code blocks (more comprehensive)
+      pageContent = pageContent.replace(/\$\(document\)\.ready\s*\([^)]*\)\s*\{[\s\S]*?\}\s*\)\s*;/gi, '');
+      pageContent = pageContent.replace(/\$\(document\)\.ready\s*\([^)]*\)\s*\{[\s\S]*?\}\s*\)/gi, '');
+      // Remove any HTML elements containing JavaScript code
+      pageContent = pageContent.replace(/<p[^>]*>[\s\S]*?\$\(document\)[\s\S]*?<\/p>/gi, '');
+      pageContent = pageContent.replace(/<div[^>]*>[\s\S]*?\$\(document\)[\s\S]*?<\/div>/gi, '');
+      // Remove any remaining code-like patterns at the end
+      pageContent = pageContent.replace(/\}\s*\)\s*;?\s*$/gm, '');
+      pageContent = pageContent.replace(/\}\s*;?\s*$/gm, '');
+      // Remove any standalone closing braces/semicolons that might be left
+      pageContent = pageContent.replace(/\s*\}\s*\)\s*;?\s*<\/p>/gi, '</p>');
+      pageContent = pageContent.replace(/\s*\}\s*\)\s*;?\s*$/gm, '');
+      // Remove empty paragraphs or paragraphs with only whitespace/code
+      pageContent = pageContent.replace(/<p[^>]*>\s*[\}\(\)\$;\.]*\s*<\/p>/gi, '');
     }
     
     return (
