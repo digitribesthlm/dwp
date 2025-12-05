@@ -412,7 +412,7 @@ export default function EvaluationWizard() {
           integritetspolicy
         </Link>{' '}
         och{' '}
-        <Link href="/cookies-integritet/" className="text-blue-600 hover:underline font-semibold">
+        <Link href="/cookie/" className="text-blue-600 hover:underline font-semibold">
           cookiepolicy
         </Link>
         .
