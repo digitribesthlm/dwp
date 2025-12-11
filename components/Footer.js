@@ -11,6 +11,10 @@ export default function Footer({ data }) {
   const email = company?.contact?.email || siteConfig.contactEmail;
   const tagline = company?.tagline || siteConfig.description || '';
   const address = company?.address || siteConfig.contactAddress;
+  
+  // Handle twitter - extract username if full URL is provided
+  const rawTwitter = siteConfig.twitterAccount;
+  const twitter = rawTwitter?.replace(/^https?:\/\/(www\.)?(x\.com|twitter\.com)\/?/, '').replace(/^@/, '') || '';
   const navItems = (navigation?.primary?.length ? navigation.primary : siteConfig.navItems).filter(
     (item) => {
       const label = item?.label?.toLowerCase?.() || '';
@@ -80,6 +84,21 @@ export default function Footer({ data }) {
             ) : (
               <p className="text-gray-600 text-sm">
                 Uppdatera kontaktuppgifterna i ditt API eller miljövariabler.
+              </p>
+            )}
+            {twitter && (
+              <p className="mt-3">
+                <a 
+                  href={`https://x.com/${twitter}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-blue-600 transition-colors"
+                  aria-label={`Följ oss på X (@${twitter})`}
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                  </svg>
+                </a>
               </p>
             )}
           </div>
