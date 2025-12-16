@@ -37,6 +37,11 @@ export async function generateMetadata() {
       title: heroHeading || siteName,
       description,
     },
+    ...(siteConfig.googleSiteVerification && {
+      verification: {
+        google: siteConfig.googleSiteVerification,
+      },
+    }),
   };
 
   if (heroImage?.url) {
